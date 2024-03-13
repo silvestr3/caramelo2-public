@@ -18,6 +18,7 @@ import {
 	ShoppingCart,
 	Trash2,
 } from "lucide-react";
+import Link from "next/link";
 
 export const BikeColumns: ColumnDef<IBike>[] = [
 	{
@@ -44,14 +45,14 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 
 			if (sold) {
 				return (
-					<span className="bg-red-300 text-red-800 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full border border-red-800 ">
+					<span className="bg-red-400 text-red-900 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full ">
 						ขายแล้ว
 					</span>
 				);
 			}
 
 			return (
-				<span className="bg-emerald-300 text-emerald-800 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full border border-emerald-800">
+				<span className="bg-emerald-400 text-emerald-900 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full">
 					มีอยู่
 				</span>
 			);
@@ -60,7 +61,7 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 	{
 		id: "actions",
 		cell: ({ row }) => {
-			const payment = row.original;
+			const bike = row.original;
 
 			return (
 				<DropdownMenu>
@@ -71,14 +72,18 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
-						<DropdownMenuItem className="flex justify-between">
-							<Eye className="opacity-60" />
-							ดู
-						</DropdownMenuItem>
-						<DropdownMenuItem className="flex justify-between">
-							<Pencil className="opacity-60" />
-							แก้ไข
-						</DropdownMenuItem>
+						<Link href={`/inventory/${bike.id}`}>
+							<DropdownMenuItem className="flex justify-between">
+								<Eye className="opacity-60" />
+								ดู
+							</DropdownMenuItem>
+						</Link>
+						<Link href={`/inventory/${bike.id}/edit`}>
+							<DropdownMenuItem className="flex justify-between">
+								<Pencil className="opacity-60" />
+								แก้ไข
+							</DropdownMenuItem>
+						</Link>
 						<DropdownMenuItem className="flex justify-between">
 							<ShoppingCart className="opacity-60" />
 							เพิ่ม
