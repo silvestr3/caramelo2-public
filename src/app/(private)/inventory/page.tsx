@@ -7,7 +7,7 @@ const Inventory = async () => {
 
 	return (
 		<>
-			<InventoryView bikes={bikes} />;
+			<InventoryView bikes={bikes} />
 		</>
 	);
 };
