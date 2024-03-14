@@ -19,6 +19,7 @@ import {
 	Trash2,
 } from "lucide-react";
 import Link from "next/link";
+import ProductBadge from "./ProductBadge";
 
 export const BikeColumns: ColumnDef<IBike>[] = [
 	{
@@ -44,18 +45,10 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 			const sold = row.getValue("sold");
 
 			if (sold) {
-				return (
-					<span className="bg-red-400 text-red-900 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full ">
-						ขายแล้ว
-					</span>
-				);
+				return <ProductBadge type="sold" />;
 			}
 
-			return (
-				<span className="bg-emerald-400 text-emerald-900 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full">
-					มีอยู่
-				</span>
-			);
+			return <ProductBadge type="available" />;
 		},
 	},
 	{

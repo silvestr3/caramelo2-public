@@ -28,6 +28,8 @@ import { Button } from "@/components/ui/button";
 import { Frown, Pencil, Receipt, ShoppingCart, Trash2 } from "lucide-react";
 import ActionButtons from "./components/ActionButtons";
 import Link from "next/link";
+import ProductBadge from "../components/ProductBadge";
+import ProductHeader from "./components/ProductHeader";
 
 interface ViewBikeParams {
 	params: {
@@ -87,22 +89,7 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 			<Separator className="my-2" />
 
 			<div className="py-2 grid grid-cols-2 gap-x-5">
-				<div>
-					<h2 className="text-3xl font-semibold prompt">{bike.model_name}</h2>
-					<h3 className="text-xl prompt opacity-60">{bike.model_code}</h3>
-				</div>
-
-				<div className="justify-self-end flex flex-col items-end">
-					<span
-						className={`text-xs font-bold me-2 px-2.5 py-0.5 rounded-full w-fit ${
-							bike.sold
-								? "bg-red-400 text-red-900"
-								: "bg-emerald-400 text-emerald-900"
-						}`}
-					>
-						{bike.sold ? "ขายแล้ว" : "มีอยู่"}
-					</span>
-				</div>
+				<ProductHeader bike={bike} />
 
 				<div>
 					<h4 className="text-lg">Product information</h4>
