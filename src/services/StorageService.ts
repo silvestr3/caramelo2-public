@@ -10,7 +10,7 @@ export const getStorages = async () => {
 		next: {
 			revalidate: 0,
 		},
-	}).then((res) => res.json());
+	});
 
 	return response;
 };
@@ -27,10 +27,9 @@ export const createStorage = async (payload: IStorage) => {
 
 	if (response.status === 201) {
 		revalidatePath("/storages");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const getStorage = async (storage_id: number) => {
@@ -43,7 +42,7 @@ export const getStorage = async (storage_id: number) => {
 				revalidate: 0,
 			},
 		}
-	).then((res) => res.json());
+	);
 
 	return response;
 };
@@ -63,10 +62,9 @@ export const editStorage = async (storage_id: number, payload: IStorage) => {
 
 	if (response.status == 200) {
 		revalidateTag("getStorage");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const deleteStorage = async (storage_id: number) => {
@@ -80,10 +78,9 @@ export const deleteStorage = async (storage_id: number) => {
 
 	if (response.status === 200) {
 		revalidatePath("/storages");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 type TransferStorageDataType = {
@@ -132,9 +129,6 @@ export const getStorageTransferHistory = async (
 		)}`,
 		{}
 	);
-	if (response.status == 200) {
-		return response.json();
-	} else {
-		return { status: "error", data: response.json() };
-	}
+
+	return response;
 };
