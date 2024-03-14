@@ -9,7 +9,7 @@ export const getCustomers = async () => {
 		next: {
 			revalidate: 0,
 		},
-	}).then((res) => res.json());
+	});
 
 	return response;
 };
@@ -26,10 +26,9 @@ export const createCustomer = async (payload: ICustomer) => {
 
 	if (response.status === 201) {
 		revalidatePath("/customers");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const getCustomer = async (customer_id: number) => {
@@ -42,7 +41,7 @@ export const getCustomer = async (customer_id: number) => {
 				revalidate: 0,
 			},
 		}
-	).then((res) => res.json());
+	);
 
 	return response;
 };
@@ -62,10 +61,9 @@ export const editCustomer = async (customer_id: number, payload: ICustomer) => {
 
 	if (response.status == 200) {
 		revalidateTag("getCustomer");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const deleteCustomer = async (customer_id: number) => {
@@ -79,8 +77,7 @@ export const deleteCustomer = async (customer_id: number) => {
 
 	if (response.status == 204) {
 		revalidatePath("/customers");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };

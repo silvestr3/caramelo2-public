@@ -101,7 +101,7 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 				</label>
 			</div>
 
-			<ScrollArea className="h-[calc(100%-100px)] mt-5">
+			<ScrollArea className="h-[85%] mt-1">
 				<DataTable data={BikesDisplay} columns={BikeColumns} />
 			</ScrollArea>
 		</>
