@@ -52,13 +52,13 @@ export const CustomerColumns: ColumnDef<ICustomer>[] = [
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
-						<Link href={`#`}>
+						<Link href={`/customers/${customer.id}`}>
 							<DropdownMenuItem className="flex justify-between">
 								<Eye className="opacity-60" />
 								ดู
 							</DropdownMenuItem>
 						</Link>
-						<Link href={`#`}>
+						<Link href={`/customers/${customer.id}/edit`}>
 							<DropdownMenuItem className="flex justify-between">
 								<Pencil className="opacity-60" />
 								แก้ไข
