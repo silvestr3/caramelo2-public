@@ -14,6 +14,7 @@ import {
 import { Import, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface InventoryViewProps {
 	bikes: IBike[];
@@ -100,9 +101,9 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 				</label>
 			</div>
 
-			<div className="overflow-y-auto max-h-[calc(100%-100px)] mt-5">
+			<ScrollArea className="h-[calc(100%-100px)] mt-5">
 				<DataTable data={BikesDisplay} columns={BikeColumns} />
-			</div>
+			</ScrollArea>
 		</>
 	);
 };
