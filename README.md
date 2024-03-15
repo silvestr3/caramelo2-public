@@ -27,7 +27,7 @@
 	- [ ] View transfer history
 - [ ] Sales
 	- [ ] Create sale
-	- [ ] View sale
+	- [x] View sale
 	- [x] List sales
 	- [ ] Edit sale
 	- [ ] Cancel sale

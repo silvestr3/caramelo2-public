@@ -61,13 +61,13 @@ export const OrderColumns: ColumnDef<IOrder>[] = [
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
-						<Link href={`/orders/${order.id}`}>
+						<Link href={`/sales/${order.id}`}>
 							<DropdownMenuItem className="flex justify-between">
 								<Eye className="opacity-60" />
 								ดู
 							</DropdownMenuItem>
 						</Link>
-						<Link href={`/orders/${order.id}/edit`}>
+						<Link href={`/sales/${order.id}/edit`}>
 							<DropdownMenuItem className="flex justify-between">
 								<Pencil className="opacity-60" />
 								แก้ไข
