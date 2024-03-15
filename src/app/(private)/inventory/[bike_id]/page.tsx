@@ -30,6 +30,8 @@ import ActionButtons from "./components/ActionButtons";
 import Link from "next/link";
 import ProductBadge from "../components/ProductBadge";
 import ProductHeader from "./components/ProductHeader";
+import { getFilteredOrders } from "@/services/OrderService";
+import { IOrder } from "@/types/Order";
 
 interface ViewBikeParams {
 	params: {
@@ -71,6 +73,18 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 		{ label: "บันทึกเพิ่มเติม", data: bike.notes },
 		{ label: "ชนิดรถ", data: bike.category },
 	];
+
+	const bikeOrder = (await getFilteredOrders({
+		bike_id: bike.id,
+	})) as IOrder[];
+
+	const getDate = (date: Date) => {
+		return new Date(date).toLocaleDateString("th-TH", {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+		});
+	};
 
 	return (
 		<>
@@ -145,23 +159,27 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 									<TableBody>
 										<TableRow>
 											<TableCell className="font-medium">Sold At</TableCell>
-											<TableCell className="text-right">SOLD DATE</TableCell>
+											<TableCell className="text-right">
+												{getDate(bikeOrder[0].sale_date)}
+											</TableCell>
 										</TableRow>
 
 										<TableRow>
 											<TableCell className="font-medium">Customer</TableCell>
 											<TableCell className="text-right">
-												SOLD CUSTOMER
+												{bikeOrder[0].customer}
 											</TableCell>
 										</TableRow>
 
 										<TableRow>
 											<TableCell className="font-medium">View sale</TableCell>
 											<TableCell className="text-right">
-												<Button className="gap-2" variant={"outline"}>
-													<Receipt size={"1rem"} />
-													Sale
-												</Button>
+												<Link href={`/sales/${bikeOrder[0].id}`}>
+													<Button className="gap-2" variant={"outline"}>
+														<Receipt size={"1rem"} />
+														Sale
+													</Button>
+												</Link>
 											</TableCell>
 										</TableRow>
 									</TableBody>

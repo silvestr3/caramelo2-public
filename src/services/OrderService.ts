@@ -110,10 +110,12 @@ export const getCustomerOrders = async (customer_id: number) => {
 
 export const getFilteredOrders = async ({
 	customer_id,
+	bike_id,
 	startDate,
 	endDate,
 }: {
 	customer_id?: number;
+	bike_id: number;
 	startDate?: Date;
 	endDate?: Date;
 }) => {
@@ -123,6 +125,9 @@ export const getFilteredOrders = async ({
 
 	if (customer_id) {
 		request_params.push(`customer=${customer_id}`);
+	}
+	if (bike_id) {
+		request_params.push(`bike=${bike_id}`);
 	}
 	if (startDate) {
 		request_params.push(`startDate=${startDate.toISOString().split("T")[0]}`);

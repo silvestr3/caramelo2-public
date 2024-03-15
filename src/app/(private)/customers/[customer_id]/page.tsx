@@ -120,7 +120,9 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 					<Separator orientation="vertical" className="absolute h-full" />
 					<div className="container flex flex-col justify-between h-full">
 						<div>
-							<h4 className="text-lg">Customer orders</h4>
+							<h4 className="text-lg">
+								Customer orders ({customerOrders.length})
+							</h4>
 							<Table>
 								<TableBody>
 									{customerOrders.length > 0 ? (
@@ -129,15 +131,17 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 												{customerOrders.map((order) => (
 													<TableRow>
 														<TableCell className="font-medium">
-															Sale Date
+															{order.bikes[0].model_name}
 														</TableCell>
 														<TableCell className="text-right">
 															{getDate(order.sale_date)}
 														</TableCell>
 														<TableCell className="text-right">
-															<Button variant={"outline"}>
-																<Receipt opacity={"80%"} size={"1.2rem"} />
-															</Button>
+															<Link href={`/sales/${order.id}`}>
+																<Button variant={"outline"}>
+																	<Receipt opacity={"80%"} size={"1.2rem"} />
+																</Button>
+															</Link>
 														</TableCell>
 													</TableRow>
 												))}
