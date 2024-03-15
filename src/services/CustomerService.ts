@@ -9,7 +9,7 @@ export const getCustomers = async () => {
 		next: {
 			revalidate: 0,
 		},
-	});
+	}).then((res) => res.json());
 
 	return response;
 };

@@ -17,7 +17,7 @@ const Dashboard = async () => {
 	const buttonStyle =
 		"group shadow border border-double rounded-lg flex justify-center items-center h-[150px] w-full cursor-pointer hover:border-transparent ";
 
-	const latestOrders = await getLatestOrders();
+	const latestOrders = await getLatestOrders().then((res) => res.json());
 
 	const menuPages = [
 		{

@@ -2,7 +2,6 @@
 import { IOrder } from "@/types/Order";
 import { authorizedFetch } from "@/util/AuthorizedFetch";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { DateType } from "react-tailwindcss-datepicker";
 
 export const getOrders = async () => {
 	"use server";
@@ -10,7 +9,7 @@ export const getOrders = async () => {
 		next: {
 			revalidate: 0,
 		},
-	}).then((res) => res.json());
+	});
 
 	return response;
 };
@@ -28,10 +27,9 @@ export const createOrder = async (payload: IOrder) => {
 	if (response.status === 200) {
 		revalidatePath("/inventory");
 		revalidatePath("/sales");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const getOrder = async (order_id: number) => {
@@ -44,7 +42,7 @@ export const getOrder = async (order_id: number) => {
 				revalidate: 0,
 			},
 		}
-	).then((res) => res.json());
+	);
 
 	return response;
 };
@@ -77,10 +75,9 @@ export const editOrder = async (
 	if (response.status == 200) {
 		revalidateTag("getOrder");
 		revalidatePath("sales");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const deleteOrder = async (order_id: number) => {
@@ -95,10 +92,9 @@ export const deleteOrder = async (order_id: number) => {
 	if (response.status == 200) {
 		revalidatePath("/sales");
 		revalidatePath("/inventory");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
 	}
+
+	return response;
 };
 
 export const getCustomerOrders = async (customer_id: number) => {
@@ -109,11 +105,7 @@ export const getCustomerOrders = async (customer_id: number) => {
 		{}
 	);
 
-	if (response.status === 200) {
-		return response.json();
-	} else {
-		return { status: "error", data: response.json() };
-	}
+	return response;
 };
 
 export const getFilteredOrders = async ({
@@ -122,8 +114,8 @@ export const getFilteredOrders = async ({
 	endDate,
 }: {
 	customer_id?: number;
-	startDate?: DateType;
-	endDate?: DateType;
+	startDate?: Date;
+	endDate?: Date;
 }) => {
 	"use server";
 
@@ -133,23 +125,19 @@ export const getFilteredOrders = async ({
 		request_params.push(`customer=${customer_id}`);
 	}
 	if (startDate) {
-		request_params.push(`startDate=${startDate}`);
+		request_params.push(`startDate=${startDate.toISOString().split("T")[0]}`);
 	}
 
 	if (endDate) {
-		request_params.push(`endDate=${endDate}`);
+		request_params.push(`endDate=${endDate.toISOString().split("T")[0]}`);
 	}
 
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/?${request_params.join("&")}`,
 		{}
-	);
+	).then((res) => res.json());
 
-	if (response.status === 200) {
-		return response.json();
-	} else {
-		return { status: "error", data: response.json() };
-	}
+	return response;
 };
 
 export const getLatestOrders = async () => {
@@ -158,11 +146,7 @@ export const getLatestOrders = async () => {
 		`${process.env.API_URL}/order/latest/`,
 		{}
 	);
-	if (response.status === 200) {
-		return response.json();
-	} else {
-		return { status: "error", data: response.json() };
-	}
+	return response;
 };
 
 export const getReceiptData = async (order_id: number) => {
@@ -173,9 +157,5 @@ export const getReceiptData = async (order_id: number) => {
 		{}
 	);
 
-	if (response.status === 200) {
-		return response.json();
-	} else {
-		return { status: "error", data: response.json() };
-	}
+	return response;
 };

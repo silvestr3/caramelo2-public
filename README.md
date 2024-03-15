@@ -6,18 +6,21 @@
 	 - [ ] Create product
 	 - [x] View Product
 	 - [x] List Products
+	 - [ ] Edit Product
 	 - [ ] Delete product
 	 - [ ] Import inventory
 - [ ] Customers
 	- [ ] Create customer
 	- [x] View customer
 	- [x] List customers
+	- [ ] Edit customer
 	- [ ] Delete customers
 	- [ ] Export customers information
 - [ ] Storages
 	- [ ] Create storage
 	- [x] View storage
 	- [x] List storages
+	- [ ] Edit storage
 	- [ ] Delete storage
 	- [ ] Transfer products between storages
 	- [ ] Generate transfer receipt
@@ -25,11 +28,12 @@
 - [ ] Sales
 	- [ ] Create sale
 	- [ ] View sale
-	- [ ] List sales
+	- [x] List sales
+	- [ ] Edit sale
 	- [ ] Cancel sale
 	- [ ] Generate sale receipt
-	- [ ] List sales by customer
-	- [ ] Filter sales by date
+	- [x] Filter sales by customer
+	- [x] Filter sales by date
  
 
 ## Getting Started
