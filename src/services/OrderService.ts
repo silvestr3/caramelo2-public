@@ -103,7 +103,7 @@ export const getCustomerOrders = async (customer_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/?customer=${customer_id}`,
 		{}
-	);
+	).then((res) => res.json());
 
 	return response;
 };
