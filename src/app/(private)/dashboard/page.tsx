@@ -45,7 +45,7 @@ const Dashboard = async () => {
 			label: "สถานที่จัดเก็บ",
 		},
 		{
-			href: "/empmloyees",
+			href: "/employees",
 			style: buttonStyle + "bg-sky-100 hover:bg-sky-200",
 			icon: <Contact />,
 			label: "พนักงาน",

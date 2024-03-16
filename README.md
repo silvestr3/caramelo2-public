@@ -37,7 +37,7 @@
 - [ ] Employees
   - [ ] Create employee
   - [ ] View employee
-  - [ ] List employees
+  - [x] List employees
   - [ ] Edit employee
   - [ ] Delete employee
 
