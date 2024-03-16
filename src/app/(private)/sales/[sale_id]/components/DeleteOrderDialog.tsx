@@ -10,31 +10,28 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { deleteCustomer } from "@/services/CustomerService";
-import { ICustomer } from "@/types/Customer";
+import { deleteOrder } from "@/services/OrderService";
+import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
-interface DeleteCustomerDialogProps {
-	customer: ICustomer;
+interface DeleteOrderDialogProps {
+	order: IOrder;
 	children: React.ReactNode;
 }
 
-const DeleteCustomerDialog = ({
-	customer,
-	children,
-}: DeleteCustomerDialogProps) => {
+const DeleteOrderDialog = ({ order, children }: DeleteOrderDialogProps) => {
 	const router = useRouter();
 
-	const handleDeleteCustomer = async () => {
-		const del = await deleteCustomer(customer.id);
+	const handleDeleteOrder = async () => {
+		const del = await deleteOrder(order.id);
 
 		if (del) {
-			router.push("/customers");
-			toast(`Customer ${customer.name} has been deleted`, {
+			router.push("/sales");
+			toast.success(`Order ${order.id} has been deleted`, {
 				description: getDate(new Date()),
 			});
 		}
@@ -45,14 +42,22 @@ const DeleteCustomerDialog = ({
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Confirm delete customer {customer.name}?</DialogTitle>
+					<DialogTitle>Confirm delete order {order.id}?</DialogTitle>
 				</DialogHeader>
+				<DialogDescription>
+					<h4>The following products will return to inventory: </h4>
+					<ul className="mt-2">
+						{order.bikes.map((bike) => (
+							<li>{bike.model_name}</li>
+						))}
+					</ul>
+				</DialogDescription>
 				<DialogFooter className="sm:justify-between">
 					<DialogClose asChild>
 						<Button variant="secondary">Cancel</Button>
 					</DialogClose>
 					<Button
-						onClick={handleDeleteCustomer}
+						onClick={handleDeleteOrder}
 						className="flex items-center gap-2"
 						variant={"destructive"}
 					>
@@ -65,4 +70,4 @@ const DeleteCustomerDialog = ({
 	);
 };
 
-export default DeleteCustomerDialog;
+export default DeleteOrderDialog;

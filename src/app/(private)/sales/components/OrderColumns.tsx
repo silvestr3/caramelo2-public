@@ -14,6 +14,7 @@ import {
 	Eye,
 	MoreHorizontal,
 	Pencil,
+	Receipt,
 	ShoppingCart,
 	Trash2,
 } from "lucide-react";
@@ -73,11 +74,12 @@ export const OrderColumns: ColumnDef<IOrder>[] = [
 								แก้ไข
 							</DropdownMenuItem>
 						</Link>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem className="flex justify-between">
-							<Trash2 className="opacity-60" />
-							ลบ
-						</DropdownMenuItem>
+						<Link href={`/sales/${order.id}/receipt`}>
+							<DropdownMenuItem className="flex justify-between">
+								<Receipt className="opacity-60" />
+								Receipt
+							</DropdownMenuItem>
+						</Link>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			);

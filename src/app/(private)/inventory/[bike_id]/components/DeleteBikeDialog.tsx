@@ -39,7 +39,7 @@ const DeleteBikeDialog = ({ bike, children }: DeleteBikeDialogProps) => {
 
 	return (
 		<Dialog>
-			<DialogTrigger>{children}</DialogTrigger>
+			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>Confirm delete bike {bike.model_name}?</DialogTitle>

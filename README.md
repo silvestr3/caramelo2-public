@@ -30,7 +30,7 @@
   - [x] View sale
   - [x] List sales
   - [ ] Edit sale
-  - [ ] Cancel sale
+  - [x] Cancel sale
   - [ ] Generate sale receipt
   - [x] Filter sales by customer
   - [x] Filter sales by date

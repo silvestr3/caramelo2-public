@@ -92,9 +92,11 @@ export const deleteOrder = async (order_id: number) => {
 	if (response.status == 200) {
 		revalidatePath("/sales");
 		revalidatePath("/inventory");
+
+		return true;
 	}
 
-	return response;
+	return null;
 };
 
 export const getCustomerOrders = async (customer_id: number) => {

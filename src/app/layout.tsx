@@ -18,7 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="th" className="text-white">
 			<body className={prompt.className}>{children}</body>
-			<Toaster closeButton richColors />
+			<Toaster />
 		</html>
 	);
 }
