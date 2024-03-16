@@ -36,7 +36,7 @@
   - [x] Filter sales by date
 - [ ] Employees
   - [ ] Create employee
-  - [ ] View employee
+  - [x] View employee
   - [x] List employees
   - [ ] Edit employee
   - [ ] Delete employee
