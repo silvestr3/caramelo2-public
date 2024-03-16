@@ -39,7 +39,7 @@
   - [x] View employee
   - [x] List employees
   - [ ] Edit employee
-  - [ ] Delete employee
+  - [x] Delete employee
 
 ## Getting Started
 

@@ -80,8 +80,8 @@ export const deleteEmployee = async (employee_id: number) => {
 
 	if (response.status == 204) {
 		revalidatePath("/employees");
-		return { status: "success", data: response.json() };
-	} else {
-		return { status: "error", data: response.json() };
+		return true;
 	}
+
+	return null;
 };

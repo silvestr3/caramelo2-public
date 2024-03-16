@@ -13,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Pencil, Trash2 } from "lucide-react";
+import ActionButtons from "./components/ActionButtons";
 
 interface ViewEmployeeProps {
 	params: {
@@ -55,17 +56,7 @@ const ViewEmployee = async ({ params }: ViewEmployeeProps) => {
 					)}
 				</div>
 
-				<div className="col-span-2 flex items-end justify-between py-5">
-					<Button className="flex items-center gap-2" variant={"destructive"}>
-						<Trash2 size={"1rem"} opacity={"60%"} />
-						Delete
-					</Button>
-
-					<Button className="flex items-center gap-2" variant={"default"}>
-						<Pencil size={"1rem"} opacity={"60%"} />
-						Edit
-					</Button>
-				</div>
+				<ActionButtons employee={employee} />
 			</div>
 		</>
 	);
