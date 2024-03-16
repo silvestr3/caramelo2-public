@@ -14,7 +14,7 @@
   - [x] View customer
   - [x] List customers
   - [ ] Edit customer
-  - [ ] Delete customers
+  - [x] Delete customers
   - [ ] Export customers information
 - [ ] Storages
   - [ ] Create storage

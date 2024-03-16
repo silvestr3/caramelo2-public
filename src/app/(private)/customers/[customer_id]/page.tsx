@@ -24,6 +24,7 @@ import {
 import { getCustomerOrders } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
+import ActionButtons from "./components/ActionButtons";
 
 interface ViewCustomerProps {
 	params: {
@@ -154,28 +155,7 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 							<Separator className="my-5" />
 						</div>
 
-						<div className="w-full flex justify-between">
-							<Button
-								className="flex items-center gap-2"
-								variant={"destructive"}
-							>
-								<Trash2 size={"1rem"} opacity={"60%"} />
-								Delete
-							</Button>
-
-							<div className="flex gap-1">
-								<Link href={`/customers/${customer.id}/edit`}>
-									<Button className="flex items-center gap-2">
-										<Pencil size={"1rem"} opacity={"60%"} />
-										Edit
-									</Button>
-								</Link>
-								<Button className="flex items-center gap-2">
-									<ShoppingCart size={"1rem"} opacity={"60%"} />
-									New
-								</Button>
-							</div>
-						</div>
+						<ActionButtons customer={customer} />
 					</div>
 				</div>
 			</div>

@@ -77,7 +77,8 @@ export const deleteCustomer = async (customer_id: number) => {
 
 	if (response.status == 204) {
 		revalidatePath("/customers");
+		return true;
 	}
 
-	return response;
+	return null;
 };
