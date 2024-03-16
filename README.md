@@ -21,7 +21,7 @@
   - [x] View storage
   - [x] List storages
   - [ ] Edit storage
-  - [ ] Delete storage
+  - [x] Delete storage
   - [ ] Transfer products between storages
   - [ ] Generate transfer receipt
   - [ ] View transfer history

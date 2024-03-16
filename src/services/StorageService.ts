@@ -1,8 +1,8 @@
 "use server";
 import { IStorage } from "@/types/Storage";
 import { authorizedFetch } from "@/util/AuthorizedFetch";
+import { getDate } from "@/util/GetDateString";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { DateType } from "react-tailwindcss-datepicker";
 
 export const getStorages = async () => {
 	"use server";
@@ -78,9 +78,10 @@ export const deleteStorage = async (storage_id: number) => {
 
 	if (response.status === 200) {
 		revalidatePath("/storages");
+		return true;
 	}
 
-	return response;
+	return null;
 };
 
 type TransferStorageDataType = {
@@ -110,18 +111,18 @@ export const transferProducts = async (payload: TransferStorageDataType) => {
 };
 
 export const getStorageTransferHistory = async (
-	startDate?: DateType,
-	endDate?: DateType
+	startDate?: Date,
+	endDate?: Date
 ) => {
 	"use server";
 	let request_params = [] as string[];
 
 	if (startDate) {
-		request_params.push(`startDate=${startDate}`);
+		request_params.push(`startDate=${getDate(startDate)}`);
 	}
 
 	if (endDate) {
-		request_params.push(`endDate=${endDate}`);
+		request_params.push(`endDate=${getDate(endDate)}`);
 	}
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/storage/transfer/history/?${request_params.join(

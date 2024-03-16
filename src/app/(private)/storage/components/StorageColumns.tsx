@@ -65,11 +65,6 @@ export const StorageColumns: ColumnDef<IStorage>[] = [
 								แก้ไข
 							</DropdownMenuItem>
 						</Link>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem className="flex justify-between">
-							<Trash2 className="opacity-60" />
-							ลบ
-						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			);

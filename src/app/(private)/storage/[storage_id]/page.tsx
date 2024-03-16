@@ -28,6 +28,7 @@ import { DataTable } from "@/components/ui/data-table";
 import { BikeColumns } from "../../inventory/components/BikeColumn";
 import { IBike } from "@/types/Bike";
 import ProductBadge from "../../inventory/components/ProductBadge";
+import ActionButtons from "./components/ActionButtons";
 
 interface ViewStorageProps {
 	params: {
@@ -138,25 +139,7 @@ const ViewStorage = async ({ params }: ViewStorageProps) => {
 					</ScrollArea>
 				</div>
 
-				<div className="w-full flex justify-between col-span-2">
-					<Button className="flex items-center gap-2" variant={"destructive"}>
-						<Trash2 size={"1rem"} opacity={"60%"} />
-						Delete
-					</Button>
-
-					<div className="flex gap-1">
-						<Link href={`/storages/${storage.id}/edit`}>
-							<Button className="flex items-center gap-2">
-								<Pencil size={"1rem"} opacity={"60%"} />
-								Edit
-							</Button>
-						</Link>
-						<Button className="flex items-center gap-2">
-							<ArrowLeftRight size={"1rem"} opacity={"60%"} />
-							Transfer
-						</Button>
-					</div>
-				</div>
+				<ActionButtons storage={storage} />
 			</div>
 		</>
 	);
