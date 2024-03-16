@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
 	Table,
@@ -9,6 +10,8 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { IOrder } from "@/types/Order";
+import { Receipt } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 interface LatestSalesProps {
@@ -41,6 +44,13 @@ const LatestSales = ({ sales }: LatestSalesProps) => {
 						</TableCell>
 						<TableCell>{sale.sale_date.toString()}</TableCell>
 						<TableCell>{sale.total}</TableCell>
+						<TableCell className="text-right">
+							<Link href={`/sales/${sale.id}`}>
+								<Button variant={"ghost"}>
+									<Receipt opacity={"60%"} />
+								</Button>
+							</Link>
+						</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
