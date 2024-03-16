@@ -50,10 +50,8 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<Plus />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<Plus />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>เพิ่มสถานที่จัดเก็บ</p>
@@ -61,10 +59,8 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 							</Tooltip>
 
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<ArrowLeftRight />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<ArrowLeftRight />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>โอนสินค้า</p>
@@ -72,10 +68,8 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 							</Tooltip>
 
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<History />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<History />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>ประวัติการโอนสินค้า</p>

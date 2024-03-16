@@ -62,10 +62,8 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<Plus />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<Plus />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>เพิ่มสินค้า</p>
@@ -73,10 +71,8 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 							</Tooltip>
 
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<Import />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<Import />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>นำเข้าข้อมูลสินค้า</p>

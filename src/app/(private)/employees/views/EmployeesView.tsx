@@ -51,10 +51,8 @@ const EmployeesView = ({ employees }: EmployeesViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger>
-									<Button variant={"outline"}>
-										<Plus />
-									</Button>
+								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+									<Plus />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>เพิ่มพนักงาน</p>

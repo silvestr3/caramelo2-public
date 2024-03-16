@@ -115,7 +115,7 @@ export const getFilteredOrders = async ({
 	endDate,
 }: {
 	customer_id?: number;
-	bike_id: number;
+	bike_id?: number;
 	startDate?: Date;
 	endDate?: Date;
 }) => {
