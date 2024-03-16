@@ -7,7 +7,7 @@
   - [x] View Product
   - [x] List Products
   - [ ] Edit Product
-  - [ ] Delete product
+  - [x] Delete product
   - [ ] Import inventory
 - [ ] Customers
   - [ ] Create customer

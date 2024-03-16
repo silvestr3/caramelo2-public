@@ -75,9 +75,10 @@ export const deleteBike = async (bike_id: number) => {
 
 	if (response.status == 204) {
 		revalidatePath("/inventory");
+		return true;
 	}
 
-	return response;
+	return null;
 };
 
 export const getStorageBikes = async (storage_id: number) => {

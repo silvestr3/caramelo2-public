@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { getCustomerOrders } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
+import { getDate } from "@/util/GetDateString";
 
 interface ViewCustomerProps {
 	params: {
@@ -57,14 +58,6 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 			</div>
 		);
 	}
-
-	const getDate = (date: Date) => {
-		return new Date(date).toLocaleDateString("th-TH", {
-			year: "numeric",
-			month: "long",
-			day: "numeric",
-		});
-	};
 
 	const data = [
 		{ label: "เบอร์โทรศัพท์", data: customer.phone },

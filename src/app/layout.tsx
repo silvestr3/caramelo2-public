@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Prompt } from "next/font/google";
 const prompt = Prompt({ weight: "100", subsets: ["latin", "thai"] });
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -17,6 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="th" className="text-white">
 			<body className={prompt.className}>{children}</body>
+			<Toaster closeButton richColors />
 		</html>
 	);
 }

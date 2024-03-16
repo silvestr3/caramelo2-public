@@ -7,17 +7,9 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-	Eye,
-	MoreHorizontal,
-	Pencil,
-	ShoppingCart,
-	Trash2,
-} from "lucide-react";
+import { Eye, MoreHorizontal, Pencil, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import ProductBadge from "./ProductBadge";
 
@@ -80,11 +72,6 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 						<DropdownMenuItem className="flex justify-between">
 							<ShoppingCart className="opacity-60" />
 							เพิ่ม
-						</DropdownMenuItem>
-						<DropdownMenuSeparator />
-						<DropdownMenuItem className="flex justify-between">
-							<Trash2 className="opacity-60" />
-							ลบ
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
