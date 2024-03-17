@@ -24,11 +24,14 @@ export const createCustomer = async (payload: ICustomer) => {
 		body: JSON.stringify(payload),
 	});
 
+	let status = "error";
+
 	if (response.status === 201) {
 		revalidatePath("/customers");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const getCustomer = async (customer_id: number) => {
@@ -59,11 +62,13 @@ export const editCustomer = async (customer_id: number, payload: ICustomer) => {
 		}
 	);
 
+	let status = "error";
 	if (response.status == 200) {
 		revalidateTag("getCustomer");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const deleteCustomer = async (customer_id: number) => {

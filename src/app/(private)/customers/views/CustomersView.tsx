@@ -13,6 +13,7 @@ import {
 import { Plus, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CustomerColumns } from "../components/CustomerColumns";
+import Link from "next/link";
 
 interface CustomersViewProps {
 	customers: ICustomer[];
@@ -51,9 +52,11 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<Plus />
-								</TooltipTrigger>
+								<Link href={"/customers/new"}>
+									<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+										<Plus />
+									</TooltipTrigger>
+								</Link>
 								<TooltipContent>
 									<p>เพิ่มลูกค้า</p>
 								</TooltipContent>
