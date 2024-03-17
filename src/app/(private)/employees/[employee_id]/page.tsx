@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Pencil, Trash2 } from "lucide-react";
 import ActionButtons from "./components/ActionButtons";
+import { Badge } from "@/components/ui/badge";
 
 interface ViewEmployeeProps {
 	params: {
@@ -49,10 +50,17 @@ const ViewEmployee = async ({ params }: ViewEmployeeProps) => {
 						<h3>{employee.username}</h3>
 					</div>
 
-					{employee.role === "adm" && (
-						<span className="bg-emerald-800 text-white place-self-start text-xs font-bold me-2 px-2.5 py-0.5 rounded-full">
+					{employee.role === "adm" ? (
+						<Badge className="place-self-start text-xs font-bold">
 							ผู้จัดการ
-						</span>
+						</Badge>
+					) : (
+						<Badge
+							variant={"secondary"}
+							className="place-self-start text-xs font-bold"
+						>
+							พนักงาน
+						</Badge>
 					)}
 				</div>
 

@@ -12,6 +12,7 @@ import {
 import { Eye, MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { IEmployee } from "@/types/IEmployee";
+import { Badge } from "@/components/ui/badge";
 
 export const EmployeeColumns: ColumnDef<IEmployee>[] = [
 	{
@@ -26,7 +27,11 @@ export const EmployeeColumns: ColumnDef<IEmployee>[] = [
 		accessorKey: "role",
 		header: "บทบาท",
 		cell: ({ row }) => {
-			return row.original.role === "adm" ? "ผู้จัดการ" : "พนักงาน";
+			return row.original.role === "adm" ? (
+				<Badge>ผู้จัดการ</Badge>
+			) : (
+				<Badge variant={"secondary"}>พนักงาน</Badge>
+			);
 		},
 	},
 	{
