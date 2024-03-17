@@ -13,6 +13,7 @@ import {
 import { Plus, Download, ArrowLeftRight, History } from "lucide-react";
 import { useEffect, useState } from "react";
 import { StorageColumns } from "../components/StorageColumns";
+import Link from "next/link";
 
 interface StoragesViewProps {
 	storages: IStorage[];
@@ -50,9 +51,11 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<Plus />
-								</TooltipTrigger>
+								<Link href={"storage/new"}>
+									<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+										<Plus />
+									</TooltipTrigger>
+								</Link>
 								<TooltipContent>
 									<p>เพิ่มสถานที่จัดเก็บ</p>
 								</TooltipContent>

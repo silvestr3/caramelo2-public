@@ -25,11 +25,14 @@ export const createStorage = async (payload: IStorage) => {
 		body: JSON.stringify(payload),
 	});
 
+	let status = "error";
+
 	if (response.status === 201) {
 		revalidatePath("/storages");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const getStorage = async (storage_id: number) => {
@@ -60,11 +63,14 @@ export const editStorage = async (storage_id: number, payload: IStorage) => {
 		}
 	);
 
-	if (response.status == 200) {
+	let status = "error";
+
+	if (response.status === 200) {
 		revalidateTag("getStorage");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const deleteStorage = async (storage_id: number) => {
