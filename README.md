@@ -13,7 +13,7 @@
   - [x] Create customer
   - [x] View customer
   - [x] List customers
-  - [ ] Edit customer
+  - [x] Edit customer
   - [x] Delete customers
   - [ ] Export customers information
 - [ ] Storages

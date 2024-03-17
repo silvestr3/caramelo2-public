@@ -67,7 +67,7 @@ const CustomerForm = ({ customer }: CustomerFormProps) => {
 			Object.keys(customer as ICustomer).forEach((field) => {
 				if (field !== "id") {
 					// @ts-expect-error
-					setValue(field, props.customer[field]);
+					form.setValue(field, customer[field]);
 				}
 			});
 		}
@@ -202,7 +202,7 @@ const CustomerForm = ({ customer }: CustomerFormProps) => {
 						</div>
 						<div className="flex justify-between">
 							<Button
-								onClick={() => router.push("/inventory")}
+								onClick={() => router.push("/customers")}
 								variant={"outline"}
 								type="button"
 							>
