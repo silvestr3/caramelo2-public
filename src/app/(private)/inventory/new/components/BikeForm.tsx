@@ -26,6 +26,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 import { getStorages } from "@/services/StorageService";
 import { IStorage } from "@/types/Storage";
 import { product_info } from "./ProductInfo";
@@ -34,6 +42,7 @@ import { asOptionalField } from "@/util/ZodOptionalField";
 import DateSelector from "./DateSelector";
 import { createBike, editBike } from "@/services/InventoryService";
 import { getDate } from "@/util/GetDateString";
+import { Info } from "lucide-react";
 
 const editBikeFormSchema = z.object({
 	brand: z.string(),
@@ -41,9 +50,9 @@ const editBikeFormSchema = z.object({
 	model_code: z.string(),
 	engine: z.string(),
 	chassi: z.string(),
-	registration_plate: z.string(),
-	color: z.string(),
-	notes: asOptionalField(z.string()),
+	registration_plate: z.coerce.string(),
+	color: z.coerce.string(),
+	notes: asOptionalField(z.coerce.string()),
 	category: z.string(),
 	wholesale_price: z.coerce.number(),
 	wholesale_price_net: z.coerce.number(),
@@ -56,9 +65,9 @@ const createBikeFormSchema = z.object({
 	model_code: z.string().nonempty("Model code is mandatory"),
 	engine: z.string().nonempty("Engine number is mandatory"),
 	chassi: z.string().nonempty("Chassis number is mandatory"),
-	registration_plate: asOptionalField(z.string()),
-	color: asOptionalField(z.string()),
-	notes: asOptionalField(z.string()),
+	registration_plate: asOptionalField(z.coerce.string()),
+	color: asOptionalField(z.coerce.string()),
+	notes: asOptionalField(z.coerce.string()),
 	category: z.string(),
 	storage_place: z.string().nonempty("Select storage place"),
 	wholesale_price: asOptionalField(z.coerce.number()).default(0),
@@ -206,7 +215,26 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 				<div className="relative h-full">
 					<Separator orientation="vertical" className="absolute h-full" />
 					<div className="container mt-3 flex justify-between flex-col h-full">
-						<h4 className="text-lg">Store information</h4>
+						<h4 className="text-lg flex items-center gap-2">
+							Store information
+							{bike && (
+								<>
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger type="button">
+												<Info opacity={"60%"} />
+											</TooltipTrigger>
+											<TooltipContent>
+												<p>
+													หากต้องการเปลี่ยนตำแหน่งการจัดเก็บ
+													ให้ใช้หน้าการถ่ายโอนพื้นที่เก็บข้อมูล
+												</p>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
+								</>
+							)}
+						</h4>
 						<div className="container flex flex-col  gap-2">
 							<DateSelector date={selectedDate} setDate={setSelectedDate} />
 							{price_info(storages).map((item) => (
