@@ -17,10 +17,10 @@
   - [x] Delete customers
   - [ ] Export customers information
 - [ ] Storages
-  - [ ] Create storage
+  - [x] Create storage
   - [x] View storage
   - [x] List storages
-  - [ ] Edit storage
+  - [x] Edit storage
   - [x] Delete storage
   - [ ] Transfer products between storages
   - [ ] Generate transfer receipt

@@ -16,7 +16,7 @@ const ActionButtons = ({ storage }: { storage: IStorage }) => {
 			</DeleteStorageDialog>
 
 			<div className="flex gap-1">
-				<Link href={`/storages/${storage.id}/edit`}>
+				<Link href={`/storage/${storage.id}/edit`}>
 					<Button className="flex items-center gap-2">
 						<Pencil size={"1rem"} opacity={"60%"} />
 						Edit
