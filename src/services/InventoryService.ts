@@ -62,10 +62,14 @@ export const editBike = async (bike_id: number, payload: IBike) => {
 		}
 	);
 
+	let status = "error";
+
 	if (response.status == 200) {
 		revalidateTag("getBike");
+		status = "success";
 	}
-	return response;
+
+	return { status, data: response.json() };
 };
 
 export const deleteBike = async (bike_id: number) => {

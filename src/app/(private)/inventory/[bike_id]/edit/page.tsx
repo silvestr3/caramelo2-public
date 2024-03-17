@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { getBike } from "@/services/InventoryService";
 import { Separator } from "@/components/ui/separator";
+import BikeForm from "../../new/components/BikeForm";
+import { getStorages } from "@/services/StorageService";
 
 interface EditBikeParams {
 	params: {
@@ -24,6 +26,8 @@ const EditBike = async ({ params }: EditBikeParams) => {
 
 		return res.json();
 	});
+
+	const storages = await getStorages().then((res) => res.json());
 
 	return (
 		<>
@@ -45,6 +49,16 @@ const EditBike = async ({ params }: EditBikeParams) => {
 				</BreadcrumbList>
 			</Breadcrumb>
 			<Separator className="my-2" />
+
+			<div className="py-2 grid grid-cols-2 place-content-start gap-x-5 h-full">
+				<div className="col-span-2 max-h-[20%]">
+					<h2 className="text-3xl font-semibold prompt">
+						Edit product - {bike.model_name}
+					</h2>
+				</div>
+
+				<BikeForm bike={bike} />
+			</div>
 		</>
 	);
 };

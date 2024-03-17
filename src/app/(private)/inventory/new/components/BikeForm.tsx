@@ -32,7 +32,7 @@ import { product_info } from "./ProductInfo";
 import { price_info } from "./PriceInfo";
 import { asOptionalField } from "@/util/ZodOptionalField";
 import DateSelector from "./DateSelector";
-import { createBike } from "@/services/InventoryService";
+import { createBike, editBike } from "@/services/InventoryService";
 import { getDate } from "@/util/GetDateString";
 
 const editBikeFormSchema = z.object({
@@ -43,7 +43,7 @@ const editBikeFormSchema = z.object({
 	chassi: z.string(),
 	registration_plate: z.string(),
 	color: z.string(),
-	notes: z.string(),
+	notes: asOptionalField(z.string()),
 	category: z.string(),
 	wholesale_price: z.coerce.number(),
 	wholesale_price_net: z.coerce.number(),
@@ -69,12 +69,14 @@ const createBikeFormSchema = z.object({
 type createBikeFormData = z.infer<typeof createBikeFormSchema>;
 
 interface BikeFormProps {
-	storages: IStorage[];
+	storages?: IStorage[];
 	bike?: IBike;
 }
 
 const BikeForm = ({ storages, bike }: BikeFormProps) => {
-	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+	const [selectedDate, setSelectedDate] = useState<Date>(
+		bike ? new Date(bike.received_date) : new Date()
+	);
 
 	const form = useForm<createBikeFormData>({
 		resolver: zodResolver(
@@ -94,33 +96,56 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 			Object.keys(bike as IBike).forEach((field) => {
 				if (!blacklist.has(field)) {
 					// @ts-expect-error
-					setValue(field, bike[field]);
+					form.setValue(field, bike[field]);
 				}
 			});
 		}
 	}, [bike]);
 
 	const onSubmit = async (values: any) => {
-		const payload = {
+		let payload = {
 			...values,
-			sold: false,
 			received_date: selectedDate.toISOString().split("T")[0],
 		};
 
-		const req = await createBike(payload);
-		if (req.status === "success") {
-			toast.success(`Product ${values.model_name} created successfully`, {
-				description: getDate(new Date()),
+		if (!bike) {
+			// Create product form
+			payload = {
+				...payload,
+				sold: false,
+			};
+
+			const req = await createBike(payload);
+			if (req.status === "success") {
+				toast.success(`Product ${values.model_name} created successfully`, {
+					description: getDate(new Date()),
+				});
+				router.push("/inventory");
+				return;
+			}
+
+			const error = await req.data;
+			Object.keys(error).map((key) => {
+				toast.error(`${key}: ${error[key][0]}`);
 			});
-			router.push("/inventory");
+			return;
+		} else {
+			//Edit product form
+			const req = await editBike(bike.id, payload);
+			if (req.status === "success") {
+				toast.success(`Product ${values.model_name} edited successfully`, {
+					description: getDate(new Date()),
+				});
+				router.push(`/inventory/${bike.id}`);
+				return;
+			}
+
+			const error = await req.data;
+			Object.keys(error).map((key) => {
+				toast.error(`${key}: ${error[key][0]}`);
+			});
 			return;
 		}
-
-		const error = await req.data;
-		Object.keys(error).map((key) => {
-			toast.error(`${key}: ${error[key][0]}`);
-		});
-		return;
 	};
 
 	return (

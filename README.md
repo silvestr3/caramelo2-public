@@ -6,7 +6,7 @@
   - [x] Create product
   - [x] View Product
   - [x] List Products
-  - [ ] Edit Product
+  - [x] Edit Product
   - [x] Delete product
   - [ ] Import inventory
 - [ ] Customers
