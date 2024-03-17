@@ -3,7 +3,7 @@
 ## Features
 
 - [ ] Inventory
-  - [ ] Create product
+  - [x] Create product
   - [x] View Product
   - [x] List Products
   - [ ] Edit Product

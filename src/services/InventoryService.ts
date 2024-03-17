@@ -24,10 +24,14 @@ export const createBike = async (payload: IBike) => {
 		body: JSON.stringify(payload),
 	});
 
+	let status = "error";
+
 	if (response.status === 201) {
 		revalidatePath("/inventory");
+		status = "success";
 	}
-	return response;
+
+	return { status, data: response.json() };
 };
 
 export const getBike = async (bike_id: number) => {

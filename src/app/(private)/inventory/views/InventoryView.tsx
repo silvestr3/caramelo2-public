@@ -15,6 +15,8 @@ import { Import, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface InventoryViewProps {
 	bikes: IBike[];
@@ -24,6 +26,8 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [BikesDisplay, setBikesDisplay] = useState<IBike[]>(bikes);
 	const [includeSold, setIncludeSold] = useState<boolean>(false);
+
+	const router = useRouter();
 
 	const toogleIncludeSold = () => {
 		setIncludeSold((state) => !state);
@@ -62,9 +66,11 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 					<div className="flex justify-end gap-1">
 						<TooltipProvider>
 							<Tooltip>
-								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<Plus />
-								</TooltipTrigger>
+								<Link href={`/inventory/new`}>
+									<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+										<Plus />
+									</TooltipTrigger>
+								</Link>
 								<TooltipContent>
 									<p>เพิ่มสินค้า</p>
 								</TooltipContent>
