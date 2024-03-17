@@ -29,13 +29,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { IEmployee } from "@/types/IEmployee";
 import { createEmployee, editEmployee } from "@/services/EmployeeService";
 import { getDate } from "@/util/GetDateString";
+import { asOptionalField } from "@/util/ZodOptionalField";
 
 const EditFormSchema = z
 	.object({
 		name: z.string().nonempty("Name is mandatory"),
 		username: z.string().nonempty("Username is mandatory"),
-		password: z.string(),
-		repeat_password: z.string(),
+		password: asOptionalField(z.coerce.string()),
+		repeat_password: asOptionalField(z.coerce.string()),
 		role: z.string(),
 	})
 	.refine((data) => data.password === data.repeat_password, {
@@ -63,8 +64,8 @@ interface EmployeeFormProps {
 type FormDataType = {
 	name: string;
 	username: string;
-	password: string;
-	repeat_password: string;
+	password?: string;
+	repeat_password?: string;
 	role: "adm" | "emp";
 };
 
@@ -74,8 +75,10 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 			name: employee?.name,
 			username: employee?.username,
 			role: employee?.role || "emp",
+			password: "",
+			repeat_password: "",
 		},
-		resolver: zodResolver(employee ? CreateFormSchema : EditFormSchema),
+		resolver: zodResolver(!employee ? CreateFormSchema : EditFormSchema),
 	});
 
 	const router = useRouter();
@@ -97,9 +100,7 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 			}
 
 			const error = await req.data;
-			Object.keys(error).map((key) => {
-				toast.error(`${key}: ${error[key][0]}`);
-			});
+			toast.error(error.message);
 			return;
 		} else {
 			//Edit employee form
@@ -113,44 +114,46 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 			}
 
 			const error = await req.data;
-			Object.keys(error).map((key) => {
-				toast.error(`${key}: ${error[key][0]}`);
-			});
+			toast.error(error.message);
 			return;
 		}
 	};
 
-	const employee_info = [
-		{
-			label: "Employee name",
-			name: "name",
-			placeholder: "Employee name",
-		},
-		{
-			label: "Username",
-			name: "username",
-			placeholder: "Username (to be used for login)",
-		},
-		{
-			label: "Password",
-			name: "password",
-			placeholder: "Password",
-		},
-		{
-			label: "Repeat password",
-			name: "repeat_password",
-			placeholder: "Repeat password",
-		},
-		{
-			label: "Role",
-			name: "role",
-			placeholder: "Role",
-			options: [
-				{ value: "emp", label: "Employee" },
-				{ value: "adm", label: "Admin" },
-			],
-		},
-	];
+	const employee_info = () => {
+		let properties = [
+			{
+				label: "Employee name",
+				name: "name",
+				placeholder: "Employee name",
+			},
+			{
+				label: "Username",
+				name: "username",
+				placeholder: "Username (to be used for login)",
+			},
+			{
+				label: "Password",
+				name: "password",
+				placeholder: "Password",
+			},
+			{
+				label: "Repeat password",
+				name: "repeat_password",
+				placeholder: "Repeat password",
+			},
+			{
+				label: "Role",
+				name: "role",
+				placeholder: "Role",
+				options: [
+					{ value: "emp", label: "Employee" },
+					{ value: "adm", label: "Admin" },
+				],
+			},
+		];
+
+		return properties;
+	};
 
 	return (
 		<Form {...form}>
@@ -161,7 +164,7 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 			>
 				<div className="mt-3 h-full">
 					<div className="container flex flex-col mt-3  gap-2">
-						{employee_info.map((item) => (
+						{employee_info().map((item) => (
 							<FormField
 								control={form.control}
 								//@ts-expect-error

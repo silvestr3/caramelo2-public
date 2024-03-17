@@ -34,11 +34,11 @@
   - [ ] Generate sale receipt
   - [x] Filter sales by customer
   - [x] Filter sales by date
-- [ ] Employees
-  - [ ] Create employee
+- [x] Employees
+  - [x] Create employee
   - [x] View employee
   - [x] List employees
-  - [ ] Edit employee
+  - [x] Edit employee
   - [x] Delete employee
 
 ## Getting Started
