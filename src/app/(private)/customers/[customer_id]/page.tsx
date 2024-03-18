@@ -77,7 +77,9 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/customers">ลูกค้า</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/customers">ลูกค้า</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

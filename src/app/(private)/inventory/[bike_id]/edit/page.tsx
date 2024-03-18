@@ -11,6 +11,7 @@ import { getBike } from "@/services/InventoryService";
 import { Separator } from "@/components/ui/separator";
 import BikeForm from "../../new/components/BikeForm";
 import { getStorages } from "@/services/StorageService";
+import Link from "next/link";
 
 interface EditBikeParams {
 	params: {
@@ -19,27 +20,21 @@ interface EditBikeParams {
 }
 
 const EditBike = async ({ params }: EditBikeParams) => {
-	const bike = await getBike(parseInt(params.bike_id)).then((res) => {
-		if (!res.ok) {
-			return null;
-		}
-
-		return res.json();
-	});
-
-	const storages = await getStorages().then((res) => res.json());
+	const bike = await getBike(parseInt(params.bike_id));
 
 	return (
 		<>
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/inventory">สินค้า</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/inventory">สินค้า</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbLink href={`/inventory/${bike.id}`}>
-							{bike.model_name}
+						<BreadcrumbLink asChild>
+							<Link href={`/inventory/${bike.id}`}>{bike.model_name}</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />

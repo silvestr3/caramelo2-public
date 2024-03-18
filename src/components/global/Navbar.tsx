@@ -10,7 +10,7 @@ export const Navbar = () => {
 		<nav className="w-full bg-slate-800 text-zinc-300 h-24 grid grid-cols-3 p-2">
 			<div className="flex items-center">
 				<Link
-					href="/"
+					href="/dashboard"
 					className="prompt pl-10 text-3xl font-extrabold cursor-pointer "
 				>
 					คาราเมโล POS

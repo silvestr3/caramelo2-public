@@ -87,7 +87,9 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/sales">ประวัติการขาย</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/sales">ประวัติการขาย</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

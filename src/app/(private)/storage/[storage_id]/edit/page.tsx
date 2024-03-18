@@ -10,6 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import StorageForm from "../../new/components/StorageForm";
 import { getStorage } from "@/services/StorageService";
+import Link from "next/link";
 
 interface EditStorageParams {
 	params: {
@@ -27,12 +28,16 @@ const EditStorage = async ({ params }: EditStorageParams) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/storage">สถานที่จัดเก็บ</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/storage">สถานที่จัดเก็บ</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbLink href={`/storage/${params.storage_id}`}>
-							{storage.storage_name}
+						<BreadcrumbLink asChild>
+							<Link href={`/storage/${params.storage_id}`}>
+								{storage.storage_name}
+							</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />

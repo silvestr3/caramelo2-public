@@ -12,6 +12,8 @@ import {
 import { Eye, MoreHorizontal, Pencil, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import ProductBadge from "./ProductBadge";
+import { useContext } from "react";
+import { OrderContext } from "@/context/OrderContext";
 
 export const BikeColumns: ColumnDef<IBike>[] = [
 	{
@@ -34,10 +36,16 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 		accessorKey: "sold",
 		header: "สถานะ",
 		cell: ({ row }) => {
+			const bike = row.original;
 			const sold = row.getValue("sold");
+			const { orderBike } = useContext(OrderContext);
 
 			if (sold) {
 				return <ProductBadge type="sold" />;
+			}
+
+			if (orderBike?.id === bike.id) {
+				return <ProductBadge type="order" />;
 			}
 
 			return <ProductBadge type="available" />;
@@ -47,6 +55,7 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 		id: "actions",
 		cell: ({ row }) => {
 			const bike = row.original;
+			const { addBikeToOrder } = useContext(OrderContext);
 
 			return (
 				<DropdownMenu>
@@ -69,7 +78,10 @@ export const BikeColumns: ColumnDef<IBike>[] = [
 								แก้ไข
 							</DropdownMenuItem>
 						</Link>
-						<DropdownMenuItem className="flex justify-between">
+						<DropdownMenuItem
+							onClick={() => addBikeToOrder(bike)}
+							className="flex justify-between"
+						>
 							<ShoppingCart className="opacity-60" />
 							เพิ่ม
 						</DropdownMenuItem>

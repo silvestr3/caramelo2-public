@@ -10,11 +10,10 @@ import {
 	BreadcrumbSeparator,
 	BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Pencil, Trash2 } from "lucide-react";
 import ActionButtons from "./components/ActionButtons";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface ViewEmployeeProps {
 	params: {
@@ -32,7 +31,9 @@ const ViewEmployee = async ({ params }: ViewEmployeeProps) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/employees">พนักงาน</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/employees">พนักงาน</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

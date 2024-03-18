@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import React from "react";
 import StorageForm from "./components/StorageForm";
 import { getStorages } from "@/services/StorageService";
+import Link from "next/link";
 
 const CreateBike = async () => {
 	const storages = await getStorages().then((res) => res.json());
@@ -19,7 +20,9 @@ const CreateBike = async () => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/storage">สถานที่จัดเก็บ</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/storage">สถานที่จัดเก็บ</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

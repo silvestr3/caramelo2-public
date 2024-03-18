@@ -10,6 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import CustomerForm from "../../new/components/CustomerForm";
 import { getCustomer } from "@/services/CustomerService";
+import Link from "next/link";
 
 interface EditCustomerParams {
 	params: {
@@ -33,12 +34,14 @@ const EditCustomer = async ({ params }: EditCustomerParams) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/customers">ลูกค้า</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/customers">ลูกค้า</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbLink href={`/customers/${customer.id}`}>
-							{customer.name}
+						<BreadcrumbLink asChild>
+							<Link href={`/customers/${customer.id}`}>{customer.name}</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />

@@ -28,7 +28,6 @@ import { Button } from "@/components/ui/button";
 import { Frown, Pencil, Receipt, ShoppingCart, Trash2 } from "lucide-react";
 import ActionButtons from "./components/ActionButtons";
 import Link from "next/link";
-import ProductBadge from "../components/ProductBadge";
 import ProductHeader from "./components/ProductHeader";
 import { getFilteredOrders } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
@@ -40,12 +39,7 @@ interface ViewBikeParams {
 }
 
 const ViewBike = async ({ params }: ViewBikeParams) => {
-	const bike = (await getBike(parseInt(params.bike_id)).then((res) => {
-		if (!res.ok) {
-			return null;
-		}
-		return res.json();
-	})) as IBike;
+	const bike = (await getBike(parseInt(params.bike_id))) as IBike;
 
 	if (bike === null) {
 		return (
@@ -91,7 +85,9 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/inventory">สินค้า</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/inventory">สินค้า</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

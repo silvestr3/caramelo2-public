@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import EmployeeForm from "./components/EmployeeForm";
+import Link from "next/link";
 
 const CreateEmployee = () => {
 	return (
@@ -16,7 +17,9 @@ const CreateEmployee = () => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/employees">พนักงาน</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/employees">พนักงาน</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

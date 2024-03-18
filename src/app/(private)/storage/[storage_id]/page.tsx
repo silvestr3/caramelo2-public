@@ -67,7 +67,9 @@ const ViewStorage = async ({ params }: ViewStorageProps) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/storage">สถานที่จัดเก็บ</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/storage">สถานที่จัดเก็บ</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>

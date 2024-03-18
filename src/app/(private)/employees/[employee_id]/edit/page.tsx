@@ -10,6 +10,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import EmployeeForm from "../../new/components/EmployeeForm";
 import { getEmployee } from "@/services/EmployeeService";
+import Link from "next/link";
 
 interface EditEmployeeParams {
 	params: {
@@ -25,12 +26,16 @@ const EditEmployee = async ({ params }: EditEmployeeParams) => {
 			<Breadcrumb>
 				<BreadcrumbList>
 					<BreadcrumbItem>
-						<BreadcrumbLink href="/employees">ลูกค้า</BreadcrumbLink>
+						<BreadcrumbLink asChild>
+							<Link href="/employees">ลูกค้า</Link>
+						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbLink href={`/employees/${params.employee_id}`}>
-							{employee.name}
+						<BreadcrumbLink asChild>
+							<Link href={`/employees/${params.employee_id}`}>
+								{employee.name}
+							</Link>
 						</BreadcrumbLink>
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />

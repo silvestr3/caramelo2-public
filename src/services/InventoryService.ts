@@ -44,7 +44,7 @@ export const getBike = async (bike_id: number) => {
 				revalidate: 0,
 			},
 		}
-	);
+	).then((res) => res.json());
 
 	return response;
 };
