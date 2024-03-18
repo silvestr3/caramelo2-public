@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { ICustomer } from "@/types/Customer";
+import { useContext } from "react";
+import { OrderContext } from "@/context/OrderContext";
 
 export const CustomerColumns: ColumnDef<ICustomer>[] = [
 	{
@@ -42,6 +44,8 @@ export const CustomerColumns: ColumnDef<ICustomer>[] = [
 		id: "actions",
 		cell: ({ row }) => {
 			const customer = row.original;
+			const { orderCustomer, addCustomerToOrder, removeCustomerFromOrder } =
+				useContext(OrderContext);
 
 			return (
 				<DropdownMenu>
@@ -64,6 +68,13 @@ export const CustomerColumns: ColumnDef<ICustomer>[] = [
 								แก้ไข
 							</DropdownMenuItem>
 						</Link>
+						<DropdownMenuItem
+							onClick={() => addCustomerToOrder(customer)}
+							className="flex justify-between"
+						>
+							<ShoppingCart className="opacity-60" />
+							Add
+						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
 			);

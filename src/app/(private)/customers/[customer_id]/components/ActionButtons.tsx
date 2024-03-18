@@ -1,11 +1,16 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { ICustomer } from "@/types/Customer";
 import { Trash2, Pencil, ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import DeleteCustomerDialog from "./DeleteCustomerDialog";
+import { OrderContext } from "@/context/OrderContext";
 
 const ActionButtons = ({ customer }: { customer: ICustomer }) => {
+	const { addCustomerToOrder } = useContext(OrderContext);
+
 	return (
 		<div className="w-full flex justify-between">
 			<DeleteCustomerDialog customer={customer}>
@@ -17,12 +22,15 @@ const ActionButtons = ({ customer }: { customer: ICustomer }) => {
 
 			<div className="flex gap-1">
 				<Link href={`/customers/${customer.id}/edit`}>
-					<Button className="flex items-center gap-2">
+					<Button variant={"outline"} className="flex items-center gap-2">
 						<Pencil size={"1rem"} opacity={"60%"} />
 						Edit
 					</Button>
 				</Link>
-				<Button className="flex items-center gap-2">
+				<Button
+					onClick={() => addCustomerToOrder(customer)}
+					className="flex items-center gap-2"
+				>
 					<ShoppingCart size={"1rem"} opacity={"60%"} />
 					New
 				</Button>
