@@ -21,7 +21,7 @@ const ActionButtons = ({ bike }: ActionButtonsProps) => {
 
 			<div className="flex gap-1">
 				<Link href={`/inventory/${bike.id}/edit`}>
-					<Button variant={"secondary"} className="flex items-center gap-2">
+					<Button variant={"outline"} className="flex items-center gap-2">
 						<Pencil size={"1rem"} opacity={"60%"} />
 						Edit
 					</Button>

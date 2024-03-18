@@ -46,7 +46,7 @@ const LatestSales = ({ sales }: LatestSalesProps) => {
 						<TableCell>{sale.total}</TableCell>
 						<TableCell className="text-right">
 							<Link href={`/sales/${sale.id}`}>
-								<Button variant={"ghost"}>
+								<Button variant={"outline"}>
 									<Receipt opacity={"60%"} />
 								</Button>
 							</Link>
