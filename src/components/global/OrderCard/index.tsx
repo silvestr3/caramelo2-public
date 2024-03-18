@@ -4,11 +4,22 @@ import { Separator } from "../../ui/separator";
 import OrderCustomer from "./components/OrderCustomer";
 import { OrderContext } from "@/context/OrderContext";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
+import { Plus, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { IBike } from "@/types/Bike";
 import { getBike } from "@/services/InventoryService";
 import OrderBike from "./components/OrderBike";
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog";
+import AdditionalFeeDialog from "./components/AdditionalFeeDialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import OrderFee from "./components/OrderFee";
 
 const OrderCard = () => {
 	const {
@@ -62,7 +73,22 @@ const OrderCard = () => {
 						</Link>
 					</>
 				) : (
-					<>{bikeDisplay && <OrderBike bike={bikeDisplay} />}</>
+					<>
+						{bikeDisplay && <OrderBike bike={bikeDisplay} />}
+						<div className="flex items-center justify-start gap-3 mt-3 p-3">
+							<span>ค่าธรรมเนียมอื่นๆ</span>
+							<AdditionalFeeDialog>
+								<Button className="bg-slate-700 hover:rounded hover:scale-105 cursor-pointer rounded-lg p-1 size-6 flex items-center justify-center">
+									<Plus className="text-slate-50" />
+								</Button>
+							</AdditionalFeeDialog>
+						</div>
+						<div className="min-h-44 max-h-44 overflow-y-auto">
+							{orderAdditionalFees.map((fee) => (
+								<OrderFee fee={fee} />
+							))}
+						</div>
+					</>
 				)}
 			</div>
 		</div>
