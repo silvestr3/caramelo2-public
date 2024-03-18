@@ -26,7 +26,7 @@
   - [ ] Generate transfer receipt
   - [ ] View transfer history
 - [ ] Sales
-  - [ ] Create sale
+  - [x] Create sale
   - [x] View sale
   - [x] List sales
   - [ ] Edit sale

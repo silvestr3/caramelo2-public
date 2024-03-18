@@ -24,12 +24,16 @@ export const createOrder = async (payload: IOrder) => {
 		body: JSON.stringify(payload),
 	});
 
+	let status = "error";
+
 	if (response.status === 200) {
 		revalidatePath("/inventory");
 		revalidatePath("/sales");
+		revalidateTag("latestOrders");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const getOrder = async (order_id: number) => {
@@ -151,7 +155,11 @@ export const getLatestOrders = async () => {
 	"use server";
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/latest/`,
-		{}
+		{
+			next: {
+				tags: ["latestOrders"],
+			},
+		}
 	);
 	return response;
 };

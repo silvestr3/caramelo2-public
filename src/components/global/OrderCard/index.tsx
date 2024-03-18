@@ -9,17 +9,13 @@ import { Button } from "@/components/ui/button";
 import { IBike } from "@/types/Bike";
 import { getBike } from "@/services/InventoryService";
 import OrderBike from "./components/OrderBike";
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
 import AdditionalFeeDialog from "./components/AdditionalFeeDialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import OrderFee from "./components/OrderFee";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { IOrder } from "@/types/Order";
+import { createOrder } from "@/services/OrderService";
+import { useRouter } from "next/navigation";
 
 const OrderCard = () => {
 	const {
@@ -49,6 +45,38 @@ const OrderCard = () => {
 	useEffect(() => {
 		fetchData();
 	}, [orderBike, totalPrice]);
+
+	const router = useRouter();
+
+	const handleOrderCheckout = async () => {
+		if (!orderCustomer) {
+			toast.info("Select customer before checkout");
+			return;
+		}
+		const payload = {
+			customer: orderCustomer.id,
+			bikes: [orderBike],
+			additional_fees: orderAdditionalFees.map((fee) => fee),
+			discount,
+			down_payment,
+			payment_method,
+			notes,
+			total: totalPrice,
+		} as IOrder;
+
+		const checkout = await createOrder(payload);
+		if (checkout.status === "success") {
+			toast.success("Order placed successfully!");
+			const data = await checkout.data;
+			resetOrder();
+			router.push(`/sales/${data.data}`);
+		} else {
+			const error = await checkout.data;
+			Object.keys(error).map((key) => {
+				toast.error(`${key}: ${error[key][0]}`);
+			});
+		}
+	};
 
 	return (
 		<div className="text-center m-10 p-10 border border-transparent shadow-md h-[81vh] bg-slate-800 font-extrabold text-slate-50 rounded-xl">
@@ -88,9 +116,60 @@ const OrderCard = () => {
 								<OrderFee fee={fee} />
 							))}
 						</div>
+
+						<div className="flex flex-col">
+							<div className="mt-1 flex justify-between items-center p-1">
+								<label htmlFor="discount">ส่วนลด</label>
+								<Input
+									type="number"
+									id="discount"
+									value={discount}
+									onChange={(e) => setDiscount(parseFloat(e.target.value))}
+									className="bg-slate-700 my-0 focus:ring-0 border-none max-w-[50%] rounded-lg"
+								/>
+							</div>
+
+							<div className="mt-1 flex justify-between items-center p-1">
+								<label htmlFor="downpayment">เงินดาวน์</label>
+								<Input
+									type="number"
+									id="downpayment"
+									value={down_payment}
+									onChange={(e) => setDown_payment(parseFloat(e.target.value))}
+									className="bg-slate-700 my-0 focus:ring-0 border-none max-w-[50%] rounded-lg"
+								/>
+							</div>
+
+							<div className="mt-1 flex justify-between items-center p-1">
+								<label htmlFor="paymentmethod">การชำระเงิน</label>
+								<Input
+									type="text"
+									id="paymentmethod"
+									value={payment_method}
+									onChange={(e) => setPayment_method(e.target.value)}
+									className="bg-slate-700 my-0 focus:ring-0 border-none max-w-[50%] rounded-lg"
+								/>
+							</div>
+						</div>
 					</>
 				)}
 			</div>
+			{orderBike && (
+				<div className="sticky">
+					<div className="w-full border-slate-700 border-b mt-2"></div>
+					<div className="flex justify-between p-2">
+						<span>ราคารวม</span>
+						<span>฿ {totalPrice}</span>
+					</div>
+
+					<Button
+						onClick={handleOrderCheckout}
+						className="bg-slate-900 hover:bg-slate-950 p-2 px-9 rounded-lg text-slate-50"
+					>
+						สั่งซื้อชำระเงิน
+					</Button>
+				</div>
+			)}
 		</div>
 	);
 };
