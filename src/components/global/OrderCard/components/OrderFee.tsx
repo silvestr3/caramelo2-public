@@ -2,6 +2,7 @@ import { OrderContext } from "@/context/OrderContext";
 import { IAdditionalFee } from "@/types/AdditionalFee";
 import { X, Pencil } from "lucide-react";
 import React, { useContext } from "react";
+import AdditionalFeeDialog from "./AdditionalFeeDialog";
 
 interface OrderFeeProps {
 	fee: IAdditionalFee;
@@ -25,9 +26,11 @@ const OrderFee = ({ fee }: OrderFeeProps) => {
 					<X className="text-slate-800" size={14} />
 				</div>
 
-				<div className="bg-slate-50 p-1 mt-3 w-fit hidden rounded group-hover:flex hover:cursor-pointer hover:scale-110 hover:rounded-sm">
-					<Pencil className="text-slate-800" size={14} />
-				</div>
+				<AdditionalFeeDialog fee={fee}>
+					<div className="bg-slate-50 p-1 mt-3 w-fit hidden rounded group-hover:flex hover:cursor-pointer hover:scale-110 hover:rounded-sm">
+						<Pencil className="text-slate-800" size={14} />
+					</div>
+				</AdditionalFeeDialog>
 			</div>
 		</div>
 	);

@@ -11,18 +11,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { OrderContext } from "@/context/OrderContext";
 import { Plus } from "lucide-react";
-import React, { ReactNode, useContext, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { IAdditionalFee } from "@/types/AdditionalFee";
 
 interface AdditionalFeeDialogProps {
 	children: ReactNode;
+	fee?: IAdditionalFee;
 }
 
-const AdditionalFeeDialog = ({ children }: AdditionalFeeDialogProps) => {
+const AdditionalFeeDialog = ({ children, fee }: AdditionalFeeDialogProps) => {
 	const { addAdditionalFee, editAdditionalFee } = useContext(OrderContext);
 	const [description, setDescription] = useState<string>("");
 	const [amount, setAmount] = useState<number>(0);
+
+	useEffect(() => {
+		if (fee) {
+			setDescription(fee.description);
+			setAmount(fee.amount);
+		}
+	}, [fee]);
 
 	const handleAddFee = () => {
 		addAdditionalFee({
@@ -34,12 +43,24 @@ const AdditionalFeeDialog = ({ children }: AdditionalFeeDialogProps) => {
 		setDescription("");
 	};
 
+	const handleEditFee = () => {
+		if (fee)
+			editAdditionalFee({
+				id: fee.id,
+				description,
+				amount,
+			});
+
+		setAmount(0);
+		setDescription("");
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Add new additional fee</DialogTitle>
+					<DialogTitle>{fee ? "Edit" : "Add new"} additional fee</DialogTitle>
 					<DialogDescription>
 						<div className="mt-2 flex justify-between">
 							<div>
@@ -65,7 +86,11 @@ const AdditionalFeeDialog = ({ children }: AdditionalFeeDialogProps) => {
 				</DialogHeader>
 				<DialogFooter>
 					<DialogClose asChild>
-						<Button onClick={handleAddFee}>Add</Button>
+						{!fee ? (
+							<Button onClick={handleAddFee}>Add</Button>
+						) : (
+							<Button onClick={handleEditFee}>Edit</Button>
+						)}
 					</DialogClose>
 				</DialogFooter>
 			</DialogContent>
