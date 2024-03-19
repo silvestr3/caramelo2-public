@@ -81,7 +81,7 @@ const OrderCard = () => {
 			toast.success("Order placed successfully!");
 			const data = await checkout.data;
 			resetOrder();
-			router.push(`/sales/${data.data}`);
+			router.push(`/sales/${data.data}/receipt`);
 		} else {
 			const error = await checkout.data;
 			Object.keys(error).map((key) => {

@@ -174,7 +174,7 @@ export const getReceiptData = async (order_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/${order_id}/receipt/`,
 		{}
-	);
+	).then((res) => res.json());
 
 	return response;
 };

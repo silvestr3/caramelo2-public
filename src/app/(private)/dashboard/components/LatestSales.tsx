@@ -46,7 +46,7 @@ const LatestSales = ({ sales }: LatestSalesProps) => {
 						<TableCell>{getDate(sale.sale_date)}</TableCell>
 						<TableCell>{sale.total}</TableCell>
 						<TableCell className="text-right">
-							<Link href={`/sales/${sale.id}`}>
+							<Link href={`/sales/${sale.id}/receipt`}>
 								<Button variant={"outline"}>
 									<Receipt opacity={"60%"} />
 								</Button>

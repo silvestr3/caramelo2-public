@@ -26,11 +26,12 @@ const ActionButtons = ({ order }: ActionButtonsProps) => {
 						Edit
 					</Button>
 				</Link>
-
-				<Button className="flex items-center gap-2">
-					<Receipt size={"1rem"} opacity={"60%"} />
-					Receipt
-				</Button>
+				<Link href={`/sales/${order.id}/receipt`}>
+					<Button className="flex items-center gap-2">
+						<Receipt size={"1rem"} opacity={"60%"} />
+						Receipt
+					</Button>
+				</Link>
 			</div>
 		</div>
 	);

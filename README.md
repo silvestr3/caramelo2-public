@@ -25,13 +25,13 @@
   - [ ] Transfer products between storages
   - [ ] Generate transfer receipt
   - [ ] View transfer history
-- [ ] Sales
+- [x] Sales
   - [x] Create sale
   - [x] View sale
   - [x] List sales
   - [x] Edit sale
   - [x] Cancel sale
-  - [ ] Generate sale receipt
+  - [x] Generate sale receipt
   - [x] Filter sales by customer
   - [x] Filter sales by date
 - [x] Employees
