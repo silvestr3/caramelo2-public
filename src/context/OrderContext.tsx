@@ -12,6 +12,7 @@ import { IAdditionalFee } from "@/types/AdditionalFee";
 
 type OrderContextType = {
 	orderBike: IBike | null;
+	bikePrice: number;
 	orderCustomer: ICustomer | null;
 	orderAdditionalFees: IAdditionalFee[];
 	discount: number;
@@ -43,11 +44,13 @@ const OrderProvider = ({ children }: { children: React.ReactNode }) => {
 	const [payment_method, setPayment_method] = useState<string>("");
 	const [totalPrice, setTotalPrice] = useState<number>(0);
 	const [notes, setNotes] = useState<string>("");
+	const [bikePrice, setBikePrice] = useState<number>(0);
 	const [orderAdditionalFees, setOrderAdditionalFees] = useState<
 		IAdditionalFee[]
 	>([]);
 
 	const addBikeToOrder = (bike: IBike) => {
+		setBikePrice(parseFloat(bike.sale_price) || 0);
 		setOrderBike(bike);
 	};
 
@@ -95,7 +98,7 @@ const OrderProvider = ({ children }: { children: React.ReactNode }) => {
 		let total = 0;
 
 		if (orderBike) {
-			total += parseFloat(orderBike?.sale_price);
+			total += parseFloat(orderBike?.sale_price) || 0;
 			if (orderAdditionalFees) {
 				orderAdditionalFees.map((fee) => {
 					total += fee.amount;
@@ -106,12 +109,13 @@ const OrderProvider = ({ children }: { children: React.ReactNode }) => {
 		total = total - discount;
 
 		setTotalPrice(total);
-	}, [orderBike, orderAdditionalFees, discount]);
+	}, [orderBike, bikePrice, orderAdditionalFees, discount]);
 
 	return (
 		<OrderContext.Provider
 			value={{
 				orderBike,
+				bikePrice,
 				orderCustomer,
 				orderAdditionalFees,
 				discount,

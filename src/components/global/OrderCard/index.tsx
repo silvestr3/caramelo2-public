@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 const OrderCard = () => {
 	const {
 		orderBike,
+		bikePrice,
 		orderCustomer,
 		orderAdditionalFees,
 		totalPrice,
@@ -53,6 +54,11 @@ const OrderCard = () => {
 			toast.info("Select customer before checkout");
 			return;
 		}
+		if (bikePrice === 0) {
+			toast.info("Set product price before checkout");
+			return;
+		}
+
 		const payload = {
 			customer: orderCustomer.id,
 			bikes: [orderBike],

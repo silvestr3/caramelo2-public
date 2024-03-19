@@ -10,6 +10,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { IOrder } from "@/types/Order";
+import { getDate } from "@/util/GetDateString";
 import { Receipt } from "lucide-react";
 import Link from "next/link";
 import React from "react";
@@ -42,7 +43,7 @@ const LatestSales = ({ sales }: LatestSalesProps) => {
 								</div>
 							))}
 						</TableCell>
-						<TableCell>{sale.sale_date.toString()}</TableCell>
+						<TableCell>{getDate(sale.sale_date)}</TableCell>
 						<TableCell>{sale.total}</TableCell>
 						<TableCell className="text-right">
 							<Link href={`/sales/${sale.id}`}>

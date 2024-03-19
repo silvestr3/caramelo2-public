@@ -50,7 +50,7 @@ const OrdersView = ({ orders }: OrdersViewProps) => {
 				</div>
 			</div>
 
-			<ScrollArea className="mt-3">
+			<ScrollArea className="h-[85%] mt-5">
 				<DataTable data={ordersDisplay} columns={OrderColumns} />
 			</ScrollArea>
 		</>

@@ -20,11 +20,18 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { IOrder } from "@/types/Order";
+import { getDate } from "@/util/GetDateString";
 
 export const OrderColumns: ColumnDef<IOrder>[] = [
 	{
 		accessorKey: "sale_date",
 		header: "Sale Date",
+		cell: ({ row }) => {
+			const order = row.original;
+			const date = getDate(order.sale_date);
+
+			return <div>{date}</div>;
+		},
 	},
 	{
 		header: "Customer Name",

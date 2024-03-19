@@ -2,6 +2,7 @@ import { IBike } from "@/types/Bike";
 import { OrderContext } from "@/context/OrderContext";
 import { Pencil, X } from "lucide-react";
 import { useContext } from "react";
+import EditBikePriceDialog from "./EditBikePriceDialog";
 
 interface OrderBikeProps {
 	bike: IBike;
@@ -31,9 +32,11 @@ const OrderBike = ({ bike }: OrderBikeProps) => {
 				>
 					<X size={14} className="text-slate-900" />
 				</div>
-				<div className="bg-slate-200 rounded h-5 w-5 flex items-center justify-center hover:cursor-pointer hover:scale-110 hover:rounded-sm">
-					<Pencil size={14} className="text-slate-900" />
-				</div>
+				<EditBikePriceDialog bike={bike}>
+					<div className="bg-slate-200 rounded h-5 w-5 flex items-center justify-center hover:cursor-pointer hover:scale-110 hover:rounded-sm">
+						<Pencil size={14} className="text-slate-900" />
+					</div>
+				</EditBikePriceDialog>
 			</div>
 		</div>
 	);
