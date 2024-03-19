@@ -58,9 +58,7 @@ const ViewStorage = async ({ params }: ViewStorageProps) => {
 		);
 	}
 
-	const storageBikes = await getStorageBikes(parseInt(params.storage_id)).then(
-		(res) => res.json()
-	);
+	const storageBikes = await getStorageBikes(parseInt(params.storage_id));
 
 	return (
 		<>

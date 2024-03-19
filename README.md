@@ -22,7 +22,7 @@
   - [x] List storages
   - [x] Edit storage
   - [x] Delete storage
-  - [ ] Transfer products between storages
+  - [x] Transfer products between storages
   - [ ] Generate transfer receipt
   - [ ] View transfer history
 - [x] Sales

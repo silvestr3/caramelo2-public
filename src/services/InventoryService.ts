@@ -94,7 +94,7 @@ export const getStorageBikes = async (storage_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/inventory/?storage=${storage_id}`,
 		{}
-	);
+	).then((res) => res.json());
 
 	return response;
 };
