@@ -14,6 +14,7 @@ import { Plus, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { CustomerColumns } from "../components/CustomerColumns";
 import Link from "next/link";
+import { CSVLink } from "react-csv";
 
 interface CustomersViewProps {
 	customers: ICustomer[];
@@ -64,7 +65,9 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 
 							<Tooltip>
 								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<Download />
+									<CSVLink filename="caramelo-customers.csv" data={customers}>
+										<Download />
+									</CSVLink>
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>ส่งออกลูกค้า</p>

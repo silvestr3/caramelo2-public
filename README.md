@@ -9,13 +9,13 @@
   - [x] Edit Product
   - [x] Delete product
   - [ ] Import inventory
-- [ ] Customers
+- [x] Customers
   - [x] Create customer
   - [x] View customer
   - [x] List customers
   - [x] Edit customer
   - [x] Delete customers
-  - [ ] Export customers information
+  - [x] Export customers information
 - [ ] Storages
   - [x] Create storage
   - [x] View storage
