@@ -40,6 +40,13 @@
   - [x] List employees
   - [x] Edit employee
   - [x] Delete employee
+- [ ] Authentication
+	- [ ] Login / Logout
+	- [ ] Employee user cannot access employees and storages pages
+	- [ ] Admin user cannot delete himself
+	- [ ] Employee user cannot view wholesale price information
+	- [ ] Employee user cannot edit sale
+	
 
 ## Getting Started
 

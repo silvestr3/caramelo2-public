@@ -1,10 +1,38 @@
+"use client";
 import Link from "next/link";
 import { LogOut, Bell } from "lucide-react";
-// import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export const Navbar = () => {
-	// const { data: session } = useSession();
-	// const userInfo = session?.user;
+	const { data: session } = useSession();
+	const userInfo = session?.user;
+
+	const menu = [
+		{
+			href: "/dashboard",
+			label: "แผงควบคุม",
+		},
+		{
+			href: "/employees",
+			label: "พนักงาน",
+		},
+		{
+			href: "/inventory",
+			label: "สินค้า",
+		},
+		{
+			href: "/customers",
+			label: "ลูกค้า",
+		},
+		{
+			href: "/storage",
+			label: "สถานที่จัดเก็บ",
+		},
+		{
+			href: "/sales",
+			label: "ขาย",
+		},
+	];
 
 	return (
 		<nav className="w-full bg-slate-800 text-zinc-300 h-24 grid grid-cols-3 p-2">
@@ -17,47 +45,25 @@ export const Navbar = () => {
 				</Link>
 			</div>
 			<span className="flex justify-center items-center text-sm text-white font-extrabold">
-				Logged in as jaiko
+				Logged in as {userInfo?.username}
 			</span>
 			<div className="flex justify-center flex-row space-x-3 items-center text-gray-200">
-				<Link
-					href={"/dashboard"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					แผงควบคุม
-				</Link>
-				<Link
-					href={"/employees"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					พนักงาน
-				</Link>
-				<Link
-					href={"/inventory"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					สินค้า
-				</Link>
-				<Link
-					href={"/customers"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					ลูกค้า
-				</Link>
-				<Link
-					href={"/storage"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					สถานที่จัดเก็บ
-				</Link>
-				<Link
-					href={"/sales"}
-					className="cursor-pointer p-3 rounded hover:bg-slate-600"
-				>
-					ขาย
-				</Link>
-				<Bell className="cursor-pointer" opacity={0.6} size={20} />
-				<LogOut className="ml-10 cursor-pointer" opacity={0.6} size={20} />
+				{menu.map((item) => (
+					<Link
+						href={item.href}
+						className="cursor-pointer p-3 rounded hover:bg-slate-600"
+					>
+						{item.label}
+					</Link>
+				))}
+
+				<Bell className="cursor-pointer" opacity={0.6} size={"1.2rem"} />
+				<LogOut
+					onClick={() => signOut()}
+					className="ml-10 cursor-pointer"
+					opacity={0.6}
+					size={"1.2rem"}
+				/>
 			</div>
 		</nav>
 	);
