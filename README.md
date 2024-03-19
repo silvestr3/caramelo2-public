@@ -29,7 +29,7 @@
   - [x] Create sale
   - [x] View sale
   - [x] List sales
-  - [ ] Edit sale
+  - [x] Edit sale
   - [x] Cancel sale
   - [ ] Generate sale receipt
   - [x] Filter sales by customer

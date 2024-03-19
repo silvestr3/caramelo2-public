@@ -77,7 +77,6 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 		{ label: "เลขตัวเครื่อง", data: orderBike.engine },
 		{ label: "เลขตัวถัง", data: orderBike.chassi },
 		{ label: "ป้ายทะเบียน", data: orderBike.registration_plate },
-		{ label: "สถานที่เก็บ", data: orderBike.storage_place },
 		{ label: "บันทึกเพิ่มเติม", data: orderBike.notes },
 		{ label: "ชนิดรถ", data: orderBike.category },
 	];
@@ -142,7 +141,7 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 						{order.additional_fees?.length! > 0 && (
 							<div>
 								<h4 className="text-lg">Additional Fees</h4>
-								<ScrollArea className="h-[200px]">
+								<ScrollArea className="h-[100px] mb-3">
 									<Table>
 										<TableBody>
 											{order.additional_fees?.map((fee) => (
@@ -162,9 +161,25 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 						)}
 
 						<div>
-							<h4 className="text-lg">Price information</h4>
+							<h4 className="text-lg">Sale information</h4>
 							<Table>
 								<TableBody>
+									<TableRow>
+										<TableCell className="font-medium">
+											Payment method
+										</TableCell>
+										<TableCell className="font-medium text-right">
+											{order.payment_method}
+										</TableCell>
+									</TableRow>
+
+									<TableRow>
+										<TableCell className="font-medium">Notes</TableCell>
+										<TableCell className="font-medium text-right">
+											{order.notes}
+										</TableCell>
+									</TableRow>
+
 									<TableRow>
 										<TableCell className="font-medium">Product price</TableCell>
 										<TableCell className="font-medium text-right">

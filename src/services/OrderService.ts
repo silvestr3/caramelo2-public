@@ -58,6 +58,7 @@ type EditOrderFormDataType = {
 	additionalFees: { id: number; description: string; amount: number }[];
 	discount: number;
 	downPayment: number;
+	total: number;
 };
 
 export const editOrder = async (
@@ -76,12 +77,15 @@ export const editOrder = async (
 		}
 	);
 
+	let status = "error";
+
 	if (response.status == 200) {
 		revalidateTag("getOrder");
 		revalidatePath("sales");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };
 
 export const deleteOrder = async (order_id: number) => {
