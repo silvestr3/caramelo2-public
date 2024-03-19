@@ -2,13 +2,13 @@
 
 ## Features
 
-- [ ] Inventory
+- [x] Inventory
   - [x] Create product
   - [x] View Product
   - [x] List Products
   - [x] Edit Product
   - [x] Delete product
-  - [ ] Import inventory
+  - [x] Import inventory
 - [x] Customers
   - [x] Create customer
   - [x] View customer

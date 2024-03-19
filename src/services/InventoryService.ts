@@ -115,9 +115,12 @@ export const importInventory = async (payload: {
 		}
 	);
 
+	let status = "error";
+
 	if (response.status === 200) {
 		revalidatePath("/inventory");
+		status = "success";
 	}
 
-	return response;
+	return { status, data: response.json() };
 };

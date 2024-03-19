@@ -77,9 +77,11 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 							</Tooltip>
 
 							<Tooltip>
-								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<Import />
-								</TooltipTrigger>
+								<Link href={`/inventory/import`}>
+									<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+										<Import />
+									</TooltipTrigger>
+								</Link>
 								<TooltipContent>
 									<p>นำเข้าข้อมูลสินค้า</p>
 								</TooltipContent>
