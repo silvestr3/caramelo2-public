@@ -16,7 +16,7 @@
   - [x] Edit customer
   - [x] Delete customers
   - [x] Export customers information
-- [ ] Storages
+- [x] Storages
   - [x] Create storage
   - [x] View storage
   - [x] List storages
@@ -24,7 +24,7 @@
   - [x] Delete storage
   - [x] Transfer products between storages
   - [x] View transfer history
-  - [ ] Generate transfer receipt
+  - [x] Generate transfer receipt
 - [x] Sales
   - [x] Create sale
   - [x] View sale

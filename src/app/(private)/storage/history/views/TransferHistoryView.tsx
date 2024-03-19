@@ -1,4 +1,12 @@
 "use client";
+import {
+	Breadcrumb,
+	BreadcrumbList,
+	BreadcrumbItem,
+	BreadcrumbLink,
+	BreadcrumbSeparator,
+	BreadcrumbPage,
+} from "@/components/ui/breadcrumb";
 import { IBike } from "@/types/Bike";
 import { IStorage } from "@/types/Storage";
 import { DateRangePicker } from "@/components/global/DateRangePicker";
@@ -8,6 +16,8 @@ import { getStorageTransferHistory } from "@/services/StorageService";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DataTable } from "@/components/ui/data-table";
 import { TransferHistoryColumns } from "../components/TransferHistoryColumns";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 interface TransferHistoryItem {
 	id: number;
@@ -44,6 +54,21 @@ const TransferHistoryView = ({ transferHistory }: TransferHistoryViewProps) => {
 
 	return (
 		<>
+			<Breadcrumb>
+				<BreadcrumbList>
+					<BreadcrumbItem>
+						<BreadcrumbLink asChild>
+							<Link href="/storage">สถานที่จัดเก็บ</Link>
+						</BreadcrumbLink>
+					</BreadcrumbItem>
+					<BreadcrumbSeparator />
+					<BreadcrumbItem>
+						<BreadcrumbPage>History</BreadcrumbPage>
+					</BreadcrumbItem>
+				</BreadcrumbList>
+			</Breadcrumb>
+
+			<Separator className="my-2" />
 			<div className="grid grid-cols-2">
 				<div>
 					<h2 className="text-3xl font-semibold prompt">Transfer history</h2>

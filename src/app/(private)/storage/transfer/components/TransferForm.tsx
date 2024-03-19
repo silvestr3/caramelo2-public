@@ -90,7 +90,10 @@ const TransferForm = ({ storages }: TransferFormProps) => {
 				});
 				setDestinationStorage(null);
 				setSelectedStorage(null);
-				router.push("/storage");
+
+				const data = await res.data;
+
+				router.push(`/storage/transfer/receipt/${data.data}`);
 			} else {
 				const error = await res.data;
 				Object.keys(error).map((key) => {

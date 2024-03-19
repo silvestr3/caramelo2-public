@@ -2,27 +2,14 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-	Eye,
-	MoreHorizontal,
-	Pencil,
-	Receipt,
-	ShoppingCart,
-	Trash2,
-} from "lucide-react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { Receipt } from "lucide-react";
 import Link from "next/link";
 import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
 import { IBike } from "@/types/Bike";
 import { IStorage } from "@/types/Storage";
+import TransferReceiptTemplate from "@/components/pdf/TransferReceiptTemplate";
 
 interface TransferHistoryItem {
 	id: number;
@@ -68,9 +55,11 @@ export const TransferHistoryColumns: ColumnDef<TransferHistoryItem>[] = [
 			const item = row.original;
 
 			return (
-				<Button variant={"outline"}>
-					<Receipt size={"1.2rem"} opacity={"60%"} />
-				</Button>
+				<Link href={`/storage/transfer/receipt/${item.id}`}>
+					<Button variant={"outline"}>
+						<Receipt size={"1.2rem"} opacity={"60%"} />
+					</Button>
+				</Link>
 			);
 		},
 	},

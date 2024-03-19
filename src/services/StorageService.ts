@@ -144,3 +144,13 @@ export const getStorageTransferHistory = async (
 
 	return response;
 };
+
+export const getTransferItem = async (itemId: number) => {
+	"use server";
+	const response = await authorizedFetch(
+		`${process.env.API_URL}/storage/transfer/history/?id=${itemId}`,
+		{}
+	).then((res) => res.json());
+
+	return response[0];
+};
