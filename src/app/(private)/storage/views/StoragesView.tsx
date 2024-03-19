@@ -73,9 +73,11 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 							</Tooltip>
 
 							<Tooltip>
-								<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
-									<History />
-								</TooltipTrigger>
+								<Link href={"/storage/history"}>
+									<TooltipTrigger className="border rounded-sm shadow-sm p-1 hover:bg-slate-100">
+										<History />
+									</TooltipTrigger>
+								</Link>
 								<TooltipContent>
 									<p>ประวัติการโอนสินค้า</p>
 								</TooltipContent>

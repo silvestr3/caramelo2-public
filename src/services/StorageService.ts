@@ -110,6 +110,7 @@ export const transferProducts = async (payload: TransferStorageDataType) => {
 	);
 
 	if (response.status == 200) {
+		revalidateTag("transferHistory");
 		return { status: "success", data: response.json() };
 	} else {
 		return { status: "error", data: response.json() };
@@ -124,18 +125,22 @@ export const getStorageTransferHistory = async (
 	let request_params = [] as string[];
 
 	if (startDate) {
-		request_params.push(`startDate=${getDate(startDate)}`);
+		request_params.push(`startDate=${startDate.toISOString().split("T")[0]}`);
 	}
 
 	if (endDate) {
-		request_params.push(`endDate=${getDate(endDate)}`);
+		request_params.push(`endDate=${endDate.toISOString().split("T")[0]}`);
 	}
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/storage/transfer/history/?${request_params.join(
 			"&"
 		)}`,
-		{}
-	);
+		{
+			next: {
+				tags: ["transferHistory"],
+			},
+		}
+	).then((res) => res.json());
 
 	return response;
 };
