@@ -1,4 +1,12 @@
 "use client";
+import { FormField } from "@/components/ui/form";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { editOrder } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
@@ -85,10 +93,23 @@ const EditForm = ({ order }: EditFormProps) => {
 			<form id="editorder" onSubmit={handleSubmit(submitForm)}>
 				<div className="flex items-center justify-between hover:bg-slate-100 p-2 rounded">
 					<span>Payment method</span>
-					<input
-						type="text"
-						className="border-none text-xs p-2 bg-slate-200 focus:ring-0 rounded"
-						{...register("paymentMethod")}
+					<FormField
+						control={control}
+						name="paymentMethod"
+						render={({ field }) => {
+							return (
+								<Select onValueChange={field.onChange}>
+									<SelectTrigger className="border-none text-xs p-2 w-[40%] bg-slate-200 focus:ring-0 rounded">
+										<SelectValue placeholder={field.value} />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="เงินสด">เงินสด</SelectItem>
+										<SelectItem value="ไฟแนนซ์">ไฟแนนซ์</SelectItem>
+										<SelectItem value="ผ่อนกับร้าน">ผ่อนกับร้าน</SelectItem>
+									</SelectContent>
+								</Select>
+							);
+						}}
 					/>
 				</div>
 

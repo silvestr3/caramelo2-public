@@ -16,6 +16,12 @@ import { toast } from "sonner";
 import { IOrder } from "@/types/Order";
 import { createOrder } from "@/services/OrderService";
 import { useRouter } from "next/navigation";
+import {
+	Select,
+	SelectTrigger,
+	SelectContent,
+	SelectItem,
+} from "@/components/ui/select";
 
 const OrderCard = () => {
 	const {
@@ -148,13 +154,20 @@ const OrderCard = () => {
 
 							<div className="mt-1 flex justify-between items-center p-1">
 								<label htmlFor="paymentmethod">การชำระเงิน</label>
-								<Input
-									type="text"
-									id="paymentmethod"
+								<Select
 									value={payment_method}
-									onChange={(e) => setPayment_method(e.target.value)}
-									className="bg-slate-700 my-0 focus:ring-0 border-none max-w-[50%] rounded-lg"
-								/>
+									defaultValue={payment_method}
+									onValueChange={(e) => setPayment_method(e)}
+								>
+									<SelectTrigger className="bg-slate-700 my-0 focus:ring-0 border-none max-w-[50%] rounded-lg">
+										{payment_method ? payment_method : "Select"}
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="เงินสด">เงินสด</SelectItem>
+										<SelectItem value="ไฟแนนซ์">ไฟแนนซ์</SelectItem>
+										<SelectItem value="ผ่อนกับร้าน">ผ่อนกับร้าน</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 						</div>
 					</>
