@@ -13,7 +13,7 @@ import Link from "next/link";
 import TransferForm from "./components/TransferForm";
 
 const TransferStorage = async () => {
-	const storages = await getStorages().then((res) => res.json());
+	const storages = await getStorages().then((res) => res?.json());
 	return (
 		<>
 			<Breadcrumb>

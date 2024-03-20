@@ -10,7 +10,7 @@ export const getEmployees = async () => {
 			revalidate: 0,
 			tags: ["employees"],
 		},
-	}).then((res) => res.json());
+	}).then((res) => res?.json());
 
 	return response;
 };
@@ -25,11 +25,11 @@ export const createEmployee = async (payload: IEmployee) => {
 		body: JSON.stringify(payload),
 	});
 
-	if (response.status === 200) {
+	if (response?.status === 200) {
 		revalidateTag("employees");
 		return { status: "success", data: response.json() };
 	} else {
-		return { status: "error", data: response.json() };
+		return { status: "error", data: response?.json() };
 	}
 };
 
@@ -43,7 +43,7 @@ export const getEmployee = async (employee_id: number) => {
 				revalidate: 0,
 			},
 		}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -61,11 +61,11 @@ export const editEmployee = async (employee_id: number, payload: IEmployee) => {
 		}
 	);
 
-	if (response.status == 200) {
+	if (response?.status == 200) {
 		revalidateTag("getEmployee");
 		return { status: "success", data: response.json() };
 	} else {
-		return { status: "error", data: response.json() };
+		return { status: "error", data: response?.json() };
 	}
 };
 
@@ -78,7 +78,7 @@ export const deleteEmployee = async (employee_id: number) => {
 		}
 	);
 
-	if (response.status == 204) {
+	if (response?.status == 204) {
 		revalidatePath("/employees");
 		return true;
 	}

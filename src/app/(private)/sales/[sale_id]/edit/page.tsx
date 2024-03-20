@@ -26,8 +26,8 @@ import EditForm from "./components/EditForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import { authOptions } from "@/util/AuthOptions";
 
 interface EditSaleParams {
 	params: {
@@ -43,7 +43,7 @@ const EditSale = async ({ params }: EditSaleParams) => {
 	}
 
 	const order = (await getOrder(parseInt(params.sale_id)).then((res) => {
-		if (!res.ok) {
+		if (!res?.ok) {
 			return null;
 		}
 		return res.json();

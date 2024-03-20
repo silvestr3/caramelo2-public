@@ -21,7 +21,7 @@ interface EditCustomerParams {
 const EditCustomer = async ({ params }: EditCustomerParams) => {
 	const customer = await getCustomer(parseInt(params.customer_id)).then(
 		(res) => {
-			if (!res.ok) {
+			if (!res?.ok) {
 				return null;
 			}
 

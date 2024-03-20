@@ -3,7 +3,7 @@ import React from "react";
 import InventoryView from "./views/InventoryView";
 
 const Inventory = async () => {
-	const bikes = await getBikes().then((res) => res.json());
+	const bikes = await getBikes().then((res) => res?.json());
 
 	return (
 		<>

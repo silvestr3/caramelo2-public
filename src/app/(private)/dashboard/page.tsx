@@ -8,7 +8,7 @@ import MenuItems from "./components/MenuItems";
 import { Label } from "@/components/ui/label";
 
 const Dashboard = async () => {
-	const latestOrders = await getLatestOrders().then((res) => res.json());
+	const latestOrders = await getLatestOrders().then((res) => res?.json());
 
 	return (
 		<div className="flex flex-col justify-between h-full">

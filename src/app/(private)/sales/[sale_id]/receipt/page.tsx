@@ -25,7 +25,7 @@ interface ViewReceiptParams {
 
 const SaleReceipt = async ({ params }: ViewReceiptParams) => {
 	const order = (await getOrder(parseInt(params.sale_id)).then((res) => {
-		if (!res.ok) {
+		if (!res?.ok) {
 			return null;
 		}
 		return res.json();

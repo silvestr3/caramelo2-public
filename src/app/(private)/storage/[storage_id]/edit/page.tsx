@@ -20,7 +20,7 @@ interface EditStorageParams {
 
 const EditStorage = async ({ params }: EditStorageParams) => {
 	const storage = await getStorage(parseInt(params.storage_id)).then((res) =>
-		res.json()
+		res?.json()
 	);
 
 	return (

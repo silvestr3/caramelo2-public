@@ -26,14 +26,14 @@ export const createOrder = async (payload: IOrder) => {
 
 	let status = "error";
 
-	if (response.status === 200) {
+	if (response?.status === 200) {
 		revalidatePath("/inventory");
 		revalidatePath("/sales");
 		revalidateTag("latestOrders");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const getOrder = async (order_id: number) => {
@@ -79,13 +79,13 @@ export const editOrder = async (
 
 	let status = "error";
 
-	if (response.status == 200) {
+	if (response?.status == 200) {
 		revalidateTag("getOrder");
 		revalidatePath("sales");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const deleteOrder = async (order_id: number) => {
@@ -97,7 +97,7 @@ export const deleteOrder = async (order_id: number) => {
 		}
 	);
 
-	if (response.status == 200) {
+	if (response?.status == 200) {
 		revalidatePath("/sales");
 		revalidatePath("/inventory");
 
@@ -113,7 +113,7 @@ export const getCustomerOrders = async (customer_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/?customer=${customer_id}`,
 		{}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -150,7 +150,7 @@ export const getFilteredOrders = async ({
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/?${request_params.join("&")}`,
 		{}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -174,7 +174,7 @@ export const getReceiptData = async (order_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/order/${order_id}/receipt/`,
 		{}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };

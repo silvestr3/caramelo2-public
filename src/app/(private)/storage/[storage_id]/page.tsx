@@ -38,7 +38,7 @@ interface ViewStorageProps {
 
 const ViewStorage = async ({ params }: ViewStorageProps) => {
 	const storage = (await getStorage(parseInt(params.storage_id)).then((res) => {
-		if (!res.ok) {
+		if (!res?.ok) {
 			return null;
 		}
 		return res.json();

@@ -35,7 +35,7 @@ interface ViewCustomerProps {
 const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 	const customer = (await getCustomer(parseInt(params.customer_id)).then(
 		(res) => {
-			if (!res.ok) {
+			if (!res?.ok) {
 				return null;
 			}
 			return res.json();

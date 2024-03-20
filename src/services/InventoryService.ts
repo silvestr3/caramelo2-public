@@ -26,12 +26,12 @@ export const createBike = async (payload: IBike) => {
 
 	let status = "error";
 
-	if (response.status === 201) {
+	if (response?.status === 201) {
 		revalidatePath("/inventory");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const getBike = async (bike_id: number) => {
@@ -44,7 +44,7 @@ export const getBike = async (bike_id: number) => {
 				revalidate: 0,
 			},
 		}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -64,12 +64,12 @@ export const editBike = async (bike_id: number, payload: IBike) => {
 
 	let status = "error";
 
-	if (response.status == 200) {
+	if (response?.status == 200) {
 		revalidateTag("getBike");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const deleteBike = async (bike_id: number) => {
@@ -81,7 +81,7 @@ export const deleteBike = async (bike_id: number) => {
 		}
 	);
 
-	if (response.status == 204) {
+	if (response?.status == 204) {
 		revalidatePath("/inventory");
 		return true;
 	}
@@ -94,7 +94,7 @@ export const getStorageBikes = async (storage_id: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/inventory/?storage=${storage_id}`,
 		{}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -117,10 +117,10 @@ export const importInventory = async (payload: {
 
 	let status = "error";
 
-	if (response.status === 200) {
+	if (response?.status === 200) {
 		revalidatePath("/inventory");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };

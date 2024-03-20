@@ -27,12 +27,12 @@ export const createStorage = async (payload: IStorage) => {
 
 	let status = "error";
 
-	if (response.status === 201) {
+	if (response?.status === 201) {
 		revalidatePath("/storages");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const getStorage = async (storage_id: number) => {
@@ -65,12 +65,12 @@ export const editStorage = async (storage_id: number, payload: IStorage) => {
 
 	let status = "error";
 
-	if (response.status === 200) {
+	if (response?.status === 200) {
 		revalidateTag("getStorage");
 		status = "success";
 	}
 
-	return { status, data: response.json() };
+	return { status, data: response?.json() };
 };
 
 export const deleteStorage = async (storage_id: number) => {
@@ -82,7 +82,7 @@ export const deleteStorage = async (storage_id: number) => {
 		}
 	);
 
-	if (response.status === 200) {
+	if (response?.status === 200) {
 		revalidatePath("/storages");
 		return true;
 	}
@@ -109,11 +109,11 @@ export const transferProducts = async (payload: TransferStorageDataType) => {
 		}
 	);
 
-	if (response.status == 200) {
+	if (response?.status == 200) {
 		revalidateTag("transferHistory");
 		return { status: "success", data: response.json() };
 	} else {
-		return { status: "error", data: response.json() };
+		return { status: "error", data: response?.json() };
 	}
 };
 
@@ -140,7 +140,7 @@ export const getStorageTransferHistory = async (
 				tags: ["transferHistory"],
 			},
 		}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response;
 };
@@ -150,7 +150,7 @@ export const getTransferItem = async (itemId: number) => {
 	const response = await authorizedFetch(
 		`${process.env.API_URL}/storage/transfer/history/?id=${itemId}`,
 		{}
-	).then((res) => res.json());
+	).then((res) => res?.json());
 
 	return response[0];
 };
