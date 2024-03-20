@@ -78,7 +78,7 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 				</div>
 			</div>
 
-			<ScrollArea className="mt-3">
+			<ScrollArea className="h-[85%] mt-3">
 				<DataTable data={CustomersDisplay} columns={CustomerColumns} />
 			</ScrollArea>
 		</>
