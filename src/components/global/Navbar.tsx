@@ -15,6 +15,7 @@ export const Navbar = () => {
 		{
 			href: "/employees",
 			label: "พนักงาน",
+			admin: true,
 		},
 		{
 			href: "/inventory",
@@ -27,6 +28,7 @@ export const Navbar = () => {
 		{
 			href: "/storage",
 			label: "สถานที่จัดเก็บ",
+			admin: true,
 		},
 		{
 			href: "/sales",
@@ -47,17 +49,34 @@ export const Navbar = () => {
 			<span className="flex justify-center items-center text-sm text-white font-extrabold">
 				Logged in as {userInfo?.username}
 			</span>
-			<div className="flex justify-center flex-row space-x-3 items-center text-gray-200">
+			<div className="flex justify-evenly flex-row space-x-3 items-center text-gray-200">
 				{menu.map((item) => (
-					<Link
-						href={item.href}
-						className="cursor-pointer p-3 rounded hover:bg-slate-600"
-					>
-						{item.label}
-					</Link>
+					<>
+						{item.admin ? (
+							<>
+								{userInfo?.role === "adm" && (
+									<Link
+										href={item.href}
+										className="cursor-pointer p-3 rounded hover:bg-slate-600"
+									>
+										{item.label}
+									</Link>
+								)}
+							</>
+						) : (
+							<>
+								<Link
+									href={item.href}
+									className="cursor-pointer p-3 rounded hover:bg-slate-600"
+								>
+									{item.label}
+								</Link>
+							</>
+						)}
+					</>
 				))}
 
-				<Bell className="cursor-pointer" opacity={0.6} size={"1.2rem"} />
+				{/* <Bell className="cursor-pointer" opacity={0.6} size={"1.2rem"} /> */}
 				<LogOut
 					onClick={() => signOut()}
 					className="ml-10 cursor-pointer"
