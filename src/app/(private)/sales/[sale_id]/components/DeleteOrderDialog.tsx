@@ -48,7 +48,7 @@ const DeleteOrderDialog = ({ order, children }: DeleteOrderDialogProps) => {
 					<h4>The following products will return to inventory: </h4>
 					<ul className="mt-2">
 						{order.bikes.map((bike) => (
-							<li>{bike.model_name}</li>
+							<li key={bike.id}>{bike.model_name}</li>
 						))}
 					</ul>
 				</DialogDescription>

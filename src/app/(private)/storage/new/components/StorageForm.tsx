@@ -128,6 +128,7 @@ const StorageForm = ({ storage }: StorageFormProps) => {
 					<div className="container flex flex-col mt-3  gap-2">
 						{storage_info().map((item) => (
 							<FormField
+								key={item.name}
 								control={form.control}
 								//@ts-expect-error
 								name={item.name}

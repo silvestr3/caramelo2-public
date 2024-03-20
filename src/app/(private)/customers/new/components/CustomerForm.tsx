@@ -127,6 +127,7 @@ const CustomerForm = ({ customer }: CustomerFormProps) => {
 						<DateSelector date={selectedDate} setDate={setSelectedDate} />
 						{customer_info.map((item) => (
 							<FormField
+								key={item.name}
 								control={form.control}
 								//@ts-expect-error
 								name={item.name}
@@ -144,7 +145,10 @@ const CustomerForm = ({ customer }: CustomerFormProps) => {
 														</SelectTrigger>
 														<SelectContent>
 															{item.options.map((option) => (
-																<SelectItem value={option.value}>
+																<SelectItem
+																	key={option.value}
+																	value={option.value}
+																>
 																	{option.label}
 																</SelectItem>
 															))}
@@ -179,6 +183,7 @@ const CustomerForm = ({ customer }: CustomerFormProps) => {
 						<div className="container flex flex-col  gap-2">
 							{address_info.map((item) => (
 								<FormField
+									key={item.name}
 									control={form.control}
 									//@ts-expect-error
 									name={item.name}

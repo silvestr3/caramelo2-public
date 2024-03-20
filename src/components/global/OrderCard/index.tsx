@@ -125,7 +125,7 @@ const OrderCard = () => {
 						</div>
 						<div className="min-h-44 max-h-44 overflow-y-auto">
 							{orderAdditionalFees.map((fee) => (
-								<OrderFee fee={fee} />
+								<OrderFee key={fee.id} fee={fee} />
 							))}
 						</div>
 

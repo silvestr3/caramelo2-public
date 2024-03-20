@@ -166,6 +166,7 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 					<div className="container flex flex-col mt-3  gap-2">
 						{employee_info().map((item) => (
 							<FormField
+								key={item.name}
 								control={form.control}
 								//@ts-expect-error
 								name={item.name}
@@ -183,7 +184,10 @@ const EmployeeForm = ({ employee }: EmployeeFormProps) => {
 														</SelectTrigger>
 														<SelectContent>
 															{item.options.map((option) => (
-																<SelectItem value={option.value}>
+																<SelectItem
+																	key={option.value}
+																	value={option.value}
+																>
 																	{option.label}
 																</SelectItem>
 															))}

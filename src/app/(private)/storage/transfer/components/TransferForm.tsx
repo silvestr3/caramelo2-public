@@ -130,7 +130,9 @@ const TransferForm = ({ storages }: TransferFormProps) => {
 					<SelectContent>
 						{storages.map((storage) => (
 							//@ts-expect-error
-							<SelectItem value={storage.id}>{storage.storage_name}</SelectItem>
+							<SelectItem key={storage.id} value={storage.id}>
+								{storage.storage_name}
+							</SelectItem>
 						))}
 					</SelectContent>
 				</Select>
@@ -193,7 +195,7 @@ const TransferForm = ({ storages }: TransferFormProps) => {
 											<>
 												{storage.id !== parseInt(selectedStorage) && (
 													//@ts-expect-error
-													<SelectItem value={storage.id}>
+													<SelectItem key={storage.id} value={storage.id}>
 														{storage.storage_name}
 													</SelectItem>
 												)}

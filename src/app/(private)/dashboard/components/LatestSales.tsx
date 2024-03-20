@@ -33,11 +33,11 @@ const LatestSales = ({ sales }: LatestSalesProps) => {
 			</TableHeader>
 			<TableBody>
 				{sales.map((sale) => (
-					<TableRow>
+					<TableRow key={sale.id}>
 						<TableCell>{sale.customer}</TableCell>
 						<TableCell>
 							{sale.bikes.map((bike) => (
-								<div className="flex flex-col">
+								<div key={bike.id} className="flex flex-col">
 									<span>{bike.model_name}</span>
 									<span className="opacity-60">{bike.model_code}</span>
 								</div>

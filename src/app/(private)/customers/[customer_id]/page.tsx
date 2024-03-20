@@ -101,8 +101,8 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 						<Table>
 							<TableCaption>{customer.name} information</TableCaption>
 							<TableBody>
-								{data.map((row) => (
-									<TableRow>
+								{data.map((row, index) => (
+									<TableRow key={index}>
 										<TableCell className="font-medium">{row.label}</TableCell>
 										<TableCell className="text-right">{row.data}</TableCell>
 									</TableRow>
@@ -124,8 +124,8 @@ const ViewCustomer = async ({ params }: ViewCustomerProps) => {
 									{customerOrders.length > 0 ? (
 										<>
 											<ScrollArea className="h-[80%]">
-												{customerOrders.map((order) => (
-													<TableRow>
+												{customerOrders.map((order, index) => (
+													<TableRow key={index}>
 														<TableCell className="font-medium">
 															{order.bikes[0].model_name}
 														</TableCell>

@@ -1,27 +1,9 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-	Eye,
-	MoreHorizontal,
-	Pencil,
-	Receipt,
-	ShoppingCart,
-	Trash2,
-} from "lucide-react";
-import Link from "next/link";
 import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
-import { useSession } from "next-auth/react";
+import OrderRowButtons from "./OrderRowButtons";
 
 export const OrderColumns: ColumnDef<IOrder>[] = [
 	{
@@ -60,41 +42,8 @@ export const OrderColumns: ColumnDef<IOrder>[] = [
 		id: "actions",
 		cell: ({ row }) => {
 			const order = row.original;
-			const { data: session } = useSession();
-			const userInfo = session?.user;
 
-			return (
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" className="h-8 w-8 p-0">
-							<span className="sr-only">Open menu</span>
-							<MoreHorizontal className="h-4 w-4" />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						<Link href={`/sales/${order.id}`}>
-							<DropdownMenuItem className="flex justify-between">
-								<Eye className="opacity-60" />
-								ดู
-							</DropdownMenuItem>
-						</Link>
-						{userInfo?.role === "adm" && (
-							<Link href={`/sales/${order.id}/edit`}>
-								<DropdownMenuItem className="flex justify-between">
-									<Pencil className="opacity-60" />
-									แก้ไข
-								</DropdownMenuItem>
-							</Link>
-						)}
-						<Link href={`/sales/${order.id}/receipt`}>
-							<DropdownMenuItem className="flex justify-between">
-								<Receipt className="opacity-60" />
-								Receipt
-							</DropdownMenuItem>
-						</Link>
-					</DropdownMenuContent>
-				</DropdownMenu>
-			);
+			return <OrderRowButtons order={order} />;
 		},
 	},
 ];

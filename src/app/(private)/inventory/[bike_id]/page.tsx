@@ -109,7 +109,7 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 							<TableCaption>{bike.model_name} information</TableCaption>
 							<TableBody>
 								{data.map((row) => (
-									<TableRow>
+									<TableRow key={row.label}>
 										<TableCell className="font-medium">{row.label}</TableCell>
 										<TableCell className="text-right">{row.data}</TableCell>
 									</TableRow>

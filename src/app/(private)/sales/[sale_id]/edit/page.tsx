@@ -112,7 +112,7 @@ const EditSale = async ({ params }: EditSaleParams) => {
 							<TableCaption>Order PH-{documentID} information</TableCaption>
 							<TableBody>
 								{data.map((row) => (
-									<TableRow>
+									<TableRow key={row.label}>
 										<TableCell className="font-medium">{row.label}</TableCell>
 										<TableCell className="text-right">{row.data}</TableCell>
 									</TableRow>

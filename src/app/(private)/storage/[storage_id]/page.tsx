@@ -108,7 +108,7 @@ const ViewStorage = async ({ params }: ViewStorageProps) => {
 								{storageBikes.length > 0 ? (
 									<>
 										{storageBikes.map((bike: IBike) => (
-											<TableRow>
+											<TableRow key={bike.id}>
 												<TableCell className="font-medium">
 													{bike.brand}
 												</TableCell>

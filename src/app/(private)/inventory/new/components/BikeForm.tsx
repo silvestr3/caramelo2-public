@@ -173,6 +173,7 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 					<div className="container flex flex-col  gap-2">
 						{product_info.map((item) => (
 							<FormField
+								key={item.name}
 								control={form.control}
 								//@ts-expect-error
 								name={item.name}
@@ -190,7 +191,10 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 														</SelectTrigger>
 														<SelectContent>
 															{item.options.map((option) => (
-																<SelectItem value={option.value}>
+																<SelectItem
+																	key={option.value}
+																	value={option.value}
+																>
 																	{option.label}
 																</SelectItem>
 															))}
@@ -247,6 +251,7 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 										<>
 											{userInfo?.role === "adm" && (
 												<FormField
+													key={item.name}
 													control={form.control}
 													//@ts-expect-error
 													name={item.name}
@@ -264,7 +269,10 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 																			</SelectTrigger>
 																			<SelectContent>
 																				{item.options.map((option) => (
-																					<SelectItem value={option.value}>
+																					<SelectItem
+																						key={option.value}
+																						value={option.value}
+																					>
 																						{option.label}
 																					</SelectItem>
 																				))}
@@ -309,7 +317,10 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 																		</SelectTrigger>
 																		<SelectContent>
 																			{item.options.map((option) => (
-																				<SelectItem value={option.value}>
+																				<SelectItem
+																					key={option.value}
+																					value={option.value}
+																				>
 																					{option.label}
 																				</SelectItem>
 																			))}

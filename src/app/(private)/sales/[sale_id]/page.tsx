@@ -124,7 +124,7 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 							<TableCaption>Order PH-{documentID} information</TableCaption>
 							<TableBody>
 								{data.map((row) => (
-									<TableRow>
+									<TableRow key={row.label}>
 										<TableCell className="font-medium">{row.label}</TableCell>
 										<TableCell className="text-right">{row.data}</TableCell>
 									</TableRow>
@@ -145,7 +145,7 @@ const ViewOrder = async ({ params }: ViewOrderParams) => {
 									<Table>
 										<TableBody>
 											{order.additional_fees?.map((fee) => (
-												<TableRow>
+												<TableRow key={fee.id}>
 													<TableCell className="font-medium">
 														{fee.description}
 													</TableCell>

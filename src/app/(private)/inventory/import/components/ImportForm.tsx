@@ -181,7 +181,7 @@ const ImportForm = ({ storages }: ImportFormsProps) => {
 					</SelectTrigger>
 					<SelectContent>
 						{storages.map((storage) => (
-							<SelectItem value={`${storage.id}`}>
+							<SelectItem key={storage.id} value={`${storage.id}`}>
 								{storage.storage_name}
 							</SelectItem>
 						))}
@@ -209,16 +209,16 @@ const ImportForm = ({ storages }: ImportFormsProps) => {
 					<TableHeader>
 						<TableRow>
 							{bikeProperties.map((prop) => (
-								<TableHead>{prop.label}</TableHead>
+								<TableHead key={prop.value}>{prop.label}</TableHead>
 							))}
 						</TableRow>
 					</TableHeader>
 					<TableBody>
 						{bikesImport.map((bike) => (
-							<TableRow>
+							<TableRow key={bike.id}>
 								{bikeProperties.map((prop) => (
 									//@ts-expect-error
-									<TableCell>{bike[prop.value]}</TableCell>
+									<TableCell key={prop.value}>{bike[prop.value]}</TableCell>
 								))}
 							</TableRow>
 						))}
