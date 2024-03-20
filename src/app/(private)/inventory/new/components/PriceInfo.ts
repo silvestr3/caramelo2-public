@@ -5,6 +5,7 @@ type DataType = {
 	label: string;
 	placeholder: string;
 	options?: { label: string; value: string }[];
+	admin?: boolean;
 };
 
 export const price_info = (storages?: IStorage[]) => {
@@ -13,11 +14,13 @@ export const price_info = (storages?: IStorage[]) => {
 			name: "wholesale_price",
 			label: "Wholesale price",
 			placeholder: "Wholesale Price",
+			admin: true,
 		},
 		{
 			name: "wholesale_price_net",
 			label: "Wholesale price NET",
 			placeholder: "Wholesale Price NET",
+			admin: true,
 		},
 
 		{

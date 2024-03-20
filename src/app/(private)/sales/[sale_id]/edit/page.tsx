@@ -25,6 +25,9 @@ import {
 import EditForm from "./components/EditForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
 interface EditSaleParams {
 	params: {
@@ -33,6 +36,12 @@ interface EditSaleParams {
 }
 
 const EditSale = async ({ params }: EditSaleParams) => {
+	const session = await getServerSession(authOptions);
+
+	if (session?.user.role !== "adm") {
+		redirect(`/sales/${params.sale_id}`);
+	}
+
 	const order = (await getOrder(parseInt(params.sale_id)).then((res) => {
 		if (!res.ok) {
 			return null;

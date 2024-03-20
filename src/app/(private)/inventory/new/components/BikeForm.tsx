@@ -43,6 +43,7 @@ import DateSelector from "./DateSelector";
 import { createBike, editBike } from "@/services/InventoryService";
 import { getDate } from "@/util/GetDateString";
 import { Info } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 const editBikeFormSchema = z.object({
 	brand: z.string(),
@@ -157,6 +158,9 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 		}
 	};
 
+	const { data: session } = useSession();
+	const userInfo = session?.user;
+
 	return (
 		<Form {...form}>
 			<form
@@ -238,47 +242,99 @@ const BikeForm = ({ storages, bike }: BikeFormProps) => {
 						<div className="container flex flex-col  gap-2">
 							<DateSelector date={selectedDate} setDate={setSelectedDate} />
 							{price_info(storages).map((item) => (
-								<FormField
-									control={form.control}
-									//@ts-expect-error
-									name={item.name}
-									render={({ field }) => (
-										<FormItem className="flex items-center justify-between gap-10">
-											<FormLabel>{item.label}</FormLabel>
-											<FormControl className="max-w-[70%]">
-												{item.options ? (
-													<div className="flex flex-col w-full relative">
-														<Select onValueChange={field.onChange}>
-															<SelectTrigger className="max-w-full">
-																<SelectValue
-																	placeholder={`Select ${item.label}`}
-																/>
-															</SelectTrigger>
-															<SelectContent>
-																{item.options.map((option) => (
-																	<SelectItem value={option.value}>
-																		{option.label}
-																	</SelectItem>
-																))}
-															</SelectContent>
-														</Select>
-														<FormMessage className="absolute -top-4 right-0" />
-													</div>
-												) : (
-													<div className="flex flex-col w-full relative">
-														<Input
-															className="w-full placeholder:opacity-40"
-															placeholder={item.placeholder}
-															type="number"
-															{...field}
-														/>
-														<FormMessage className="absolute -top-4 right-0" />
-													</div>
+								<>
+									{item.admin ? (
+										<>
+											{userInfo?.role === "adm" && (
+												<FormField
+													control={form.control}
+													//@ts-expect-error
+													name={item.name}
+													render={({ field }) => (
+														<FormItem className="flex items-center justify-between gap-10">
+															<FormLabel>{item.label}</FormLabel>
+															<FormControl className="max-w-[70%]">
+																{item.options ? (
+																	<div className="flex flex-col w-full relative">
+																		<Select onValueChange={field.onChange}>
+																			<SelectTrigger className="max-w-full">
+																				<SelectValue
+																					placeholder={`Select ${item.label}`}
+																				/>
+																			</SelectTrigger>
+																			<SelectContent>
+																				{item.options.map((option) => (
+																					<SelectItem value={option.value}>
+																						{option.label}
+																					</SelectItem>
+																				))}
+																			</SelectContent>
+																		</Select>
+																		<FormMessage className="absolute -top-4 right-0" />
+																	</div>
+																) : (
+																	<div className="flex flex-col w-full relative">
+																		<Input
+																			className="w-full placeholder:opacity-40"
+																			placeholder={item.placeholder}
+																			type="number"
+																			{...field}
+																		/>
+																		<FormMessage className="absolute -top-4 right-0" />
+																	</div>
+																)}
+															</FormControl>
+														</FormItem>
+													)}
+												/>
+											)}
+										</>
+									) : (
+										<>
+											<FormField
+												control={form.control}
+												//@ts-expect-error
+												name={item.name}
+												render={({ field }) => (
+													<FormItem className="flex items-center justify-between gap-10">
+														<FormLabel>{item.label}</FormLabel>
+														<FormControl className="max-w-[70%]">
+															{item.options ? (
+																<div className="flex flex-col w-full relative">
+																	<Select onValueChange={field.onChange}>
+																		<SelectTrigger className="max-w-full">
+																			<SelectValue
+																				placeholder={`Select ${item.label}`}
+																			/>
+																		</SelectTrigger>
+																		<SelectContent>
+																			{item.options.map((option) => (
+																				<SelectItem value={option.value}>
+																					{option.label}
+																				</SelectItem>
+																			))}
+																		</SelectContent>
+																	</Select>
+																	<FormMessage className="absolute -top-4 right-0" />
+																</div>
+															) : (
+																<div className="flex flex-col w-full relative">
+																	<Input
+																		className="w-full placeholder:opacity-40"
+																		placeholder={item.placeholder}
+																		type="number"
+																		{...field}
+																	/>
+																	<FormMessage className="absolute -top-4 right-0" />
+																</div>
+															)}
+														</FormControl>
+													</FormItem>
 												)}
-											</FormControl>
-										</FormItem>
+											/>
+										</>
 									)}
-								/>
+								</>
 							))}
 						</div>
 						<div className="flex justify-between">

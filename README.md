@@ -44,9 +44,9 @@
 	- [x] Login / Logout
 	- [ ] Refresh token
 	- [x] Employee user cannot access employees and storages pages
-	- [ ] Admin user cannot delete himself
-	- [ ] Employee user cannot view wholesale price information
-	- [ ] Employee user cannot edit sale
+	- [x] Admin user cannot delete himself
+	- [x] Employee user cannot view wholesale price information
+	- [x] Employee user cannot edit sale
 	
 
 ## Getting Started

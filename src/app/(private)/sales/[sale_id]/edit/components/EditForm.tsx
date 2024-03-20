@@ -11,8 +11,9 @@ import { editOrder } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
 import { getDate } from "@/util/GetDateString";
 import { Plus, X } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -30,6 +31,11 @@ interface EditFormProps {
 }
 
 const EditForm = ({ order }: EditFormProps) => {
+	const { data: session } = useSession();
+	const userInfo = session?.user;
+
+	const router = useRouter();
+
 	const orderBike = order.bikes[0];
 	const { register, control, handleSubmit, formState, getValues } =
 		useForm<FormDataType>({
@@ -65,8 +71,6 @@ const EditForm = ({ order }: EditFormProps) => {
 		const total = bikePrice + fees_total - discount;
 		setTotal(total);
 	};
-
-	const router = useRouter();
 
 	const submitForm = async (data: FormDataType) => {
 		calculateTotal();

@@ -31,6 +31,7 @@ import Link from "next/link";
 import ProductHeader from "./components/ProductHeader";
 import { getFilteredOrders } from "@/services/OrderService";
 import { IOrder } from "@/types/Order";
+import PriceInformation from "./components/PriceInformation";
 
 interface ViewBikeParams {
 	params: {
@@ -121,32 +122,7 @@ const ViewBike = async ({ params }: ViewBikeParams) => {
 				<div className="relative">
 					<Separator orientation="vertical" className="absolute h-[85%]" />
 					<div className="container flex flex-col justify-between h-[85%]">
-						<div>
-							<h4 className="text-lg">Price information</h4>
-							<Table>
-								<TableBody>
-									<TableRow>
-										<TableCell className="font-medium">Sale price</TableCell>
-										<TableCell>{bike.sale_price}</TableCell>
-									</TableRow>
-
-									<TableRow>
-										<TableCell className="font-medium">
-											Wholesale price
-										</TableCell>
-										<TableCell>{bike.wholesale_price}</TableCell>
-									</TableRow>
-
-									<TableRow>
-										<TableCell className="font-medium">
-											Wholesale price NET
-										</TableCell>
-										<TableCell>{bike.wholesale_price_net}</TableCell>
-									</TableRow>
-								</TableBody>
-							</Table>
-							<Separator className="my-5" />
-						</div>
+						<PriceInformation bike={bike} />
 
 						{bike.sold && (
 							<div>
