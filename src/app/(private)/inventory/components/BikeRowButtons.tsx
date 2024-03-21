@@ -5,14 +5,20 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Eye, MoreHorizontal, Pencil, ShoppingCart } from "lucide-react";
+import {
+	Eye,
+	MoreHorizontal,
+	Pencil,
+	Receipt,
+	ShoppingCart,
+} from "lucide-react";
 import Link from "next/link";
 import { useContext } from "react";
 import { OrderContext } from "@/context/OrderContext";
 import { Button } from "@/components/ui/button";
 import { IBike } from "@/types/Bike";
 
-const BikeRowButtons = ({ bike }: { bike: IBike }) => {
+const BikeRowButtons = async ({ bike }: { bike: IBike }) => {
 	const { addBikeToOrder } = useContext(OrderContext);
 
 	return (
@@ -36,13 +42,15 @@ const BikeRowButtons = ({ bike }: { bike: IBike }) => {
 						แก้ไข
 					</DropdownMenuItem>
 				</Link>
-				<DropdownMenuItem
-					onClick={() => addBikeToOrder(bike)}
-					className="flex justify-between"
-				>
-					<ShoppingCart className="opacity-60" />
-					เพิ่ม
-				</DropdownMenuItem>
+				{!bike.sold && (
+					<DropdownMenuItem
+						onClick={() => addBikeToOrder(bike)}
+						className="flex justify-between"
+					>
+						<ShoppingCart className="opacity-60" />
+						เพิ่ม
+					</DropdownMenuItem>
+				)}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
