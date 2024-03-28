@@ -27,7 +27,9 @@ const EmployeesView = ({ employees }: EmployeesViewProps) => {
 		useState<IEmployee[]>(employees);
 
 	useEffect(() => {
-		setEmployeesDisplay(handleFilter({ searchTerm, objList: employees }));
+		setEmployeesDisplay(
+			handleFilter({ searchTerm, objList: employees }) as IEmployee[]
+		);
 	}, [searchTerm, employees]);
 
 	return (

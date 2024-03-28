@@ -27,7 +27,9 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 		useState<ICustomer[]>(customers);
 
 	useEffect(() => {
-		setCustomersDisplay(handleFilter({ objList: customers, searchTerm }));
+		setCustomersDisplay(
+			handleFilter({ objList: customers, searchTerm }) as ICustomer[]
+		);
 	}, [searchTerm, customers]);
 
 	return (

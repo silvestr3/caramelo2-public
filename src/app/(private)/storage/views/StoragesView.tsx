@@ -26,7 +26,9 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 	const [StoragesDisplay, setStoragesDisplay] = useState<IStorage[]>(storages);
 
 	useEffect(() => {
-		setStoragesDisplay(handleFilter({ objList: storages, searchTerm }));
+		setStoragesDisplay(
+			handleFilter({ objList: storages, searchTerm }) as IStorage[]
+		);
 	}, [searchTerm, storages]);
 
 	return (

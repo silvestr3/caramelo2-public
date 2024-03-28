@@ -32,10 +32,12 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 	};
 
 	useEffect(() => {
-		const filteredBikes = handleFilter({
+		let filteredBikes = handleFilter({
 			objList: bikes,
 			searchTerm,
-		}).filter((bike: IBike) => {
+		}) as IBike[];
+
+		filteredBikes.filter((bike: IBike) => {
 			if (!includeSold) return !bike.sold;
 			else return bike;
 		});

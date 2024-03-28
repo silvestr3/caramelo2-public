@@ -9,7 +9,6 @@ interface HandleFilterProps {
 }
 
 export const handleFilter = ({ searchTerm, objList }: HandleFilterProps) => {
-	//@ts-expect-error
 	const filteredObjects = objList.filter((obj: any) => {
 		for (const [_, value] of Object.entries(obj)) {
 			if (String(value).toLowerCase().includes(searchTerm.toLowerCase())) {
