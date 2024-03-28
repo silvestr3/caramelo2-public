@@ -37,7 +37,7 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 			searchTerm,
 		}) as IBike[];
 
-		filteredBikes.filter((bike: IBike) => {
+		filteredBikes = filteredBikes.filter((bike: IBike) => {
 			if (!includeSold) return !bike.sold;
 			else return bike;
 		});
