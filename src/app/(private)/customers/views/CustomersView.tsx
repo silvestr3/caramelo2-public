@@ -1,6 +1,5 @@
 "use client";
 import SearchBar from "@/components/global/SearchBar";
-import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { ICustomer } from "@/types/Customer";
@@ -11,10 +10,12 @@ import {
 	TooltipContent,
 } from "@/components/ui/tooltip";
 import { Plus, Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { CustomerColumns } from "../components/CustomerColumns";
 import Link from "next/link";
 import { CSVLink } from "react-csv";
+import { handleFilter } from "@/app/hooks/useFilter";
+import TableLoading from "@/components/global/TableLoading";
 
 interface CustomersViewProps {
 	customers: ICustomer[];
@@ -25,20 +26,8 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 	const [CustomersDisplay, setCustomersDisplay] =
 		useState<ICustomer[]>(customers);
 
-	const handleFilter = () => {
-		const filteredCustomers = customers.filter((customer: ICustomer) => {
-			for (const [_, value] of Object.entries(customer)) {
-				if (String(value).toLowerCase().includes(searchTerm.toLowerCase())) {
-					return customer;
-				}
-			}
-		});
-
-		setCustomersDisplay(filteredCustomers);
-	};
-
 	useEffect(() => {
-		handleFilter();
+		setCustomersDisplay(handleFilter({ objList: customers, searchTerm }));
 	}, [searchTerm, customers]);
 
 	return (
@@ -78,9 +67,11 @@ const CustomersView = ({ customers }: CustomersViewProps) => {
 				</div>
 			</div>
 
-			<ScrollArea className="h-[85%] mt-3">
-				<DataTable data={CustomersDisplay} columns={CustomerColumns} />
-			</ScrollArea>
+			<Suspense fallback={<TableLoading />}>
+				<ScrollArea className="h-[85%] mt-3">
+					<DataTable data={CustomersDisplay} columns={CustomerColumns} />
+				</ScrollArea>
+			</Suspense>
 		</>
 	);
 };

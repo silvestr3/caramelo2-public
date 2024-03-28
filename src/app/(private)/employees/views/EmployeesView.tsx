@@ -11,9 +11,11 @@ import {
 	TooltipContent,
 } from "@/components/ui/tooltip";
 import { Plus, Download } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { EmployeeColumns } from "../components/EmployeeColumns";
 import Link from "next/link";
+import { handleFilter } from "@/app/hooks/useFilter";
+import TableLoading from "@/components/global/TableLoading";
 
 interface EmployeesViewProps {
 	employees: IEmployee[];
@@ -24,20 +26,8 @@ const EmployeesView = ({ employees }: EmployeesViewProps) => {
 	const [EmployeesDisplay, setEmployeesDisplay] =
 		useState<IEmployee[]>(employees);
 
-	const handleFilter = () => {
-		const filteredEmployees = employees.filter((employee: IEmployee) => {
-			for (const [_, value] of Object.entries(employee)) {
-				if (String(value).toLowerCase().includes(searchTerm.toLowerCase())) {
-					return employee;
-				}
-			}
-		});
-
-		setEmployeesDisplay(filteredEmployees);
-	};
-
 	useEffect(() => {
-		handleFilter();
+		setEmployeesDisplay(handleFilter({ searchTerm, objList: employees }));
 	}, [searchTerm, employees]);
 
 	return (
@@ -66,9 +56,11 @@ const EmployeesView = ({ employees }: EmployeesViewProps) => {
 				</div>
 			</div>
 
-			<ScrollArea className="mt-3">
-				<DataTable data={EmployeesDisplay} columns={EmployeeColumns} />
-			</ScrollArea>
+			<Suspense fallback={<TableLoading />}>
+				<ScrollArea className="mt-3">
+					<DataTable data={EmployeesDisplay} columns={EmployeeColumns} />
+				</ScrollArea>
+			</Suspense>
 		</>
 	);
 };

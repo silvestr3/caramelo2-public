@@ -10,10 +10,12 @@ import {
 	TooltipTrigger,
 	TooltipContent,
 } from "@/components/ui/tooltip";
-import { Plus, Download, ArrowLeftRight, History } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Plus, ArrowLeftRight, History } from "lucide-react";
+import { Suspense, useEffect, useState } from "react";
 import { StorageColumns } from "../components/StorageColumns";
 import Link from "next/link";
+import { handleFilter } from "@/app/hooks/useFilter";
+import TableLoading from "@/components/global/TableLoading";
 
 interface StoragesViewProps {
 	storages: IStorage[];
@@ -23,20 +25,8 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 	const [searchTerm, setSearchTerm] = useState<string>("");
 	const [StoragesDisplay, setStoragesDisplay] = useState<IStorage[]>(storages);
 
-	const handleFilter = () => {
-		const filteredStorages = storages.filter((storage: IStorage) => {
-			for (const [_, value] of Object.entries(storage)) {
-				if (String(value).toLowerCase().includes(searchTerm.toLowerCase())) {
-					return storage;
-				}
-			}
-		});
-
-		setStoragesDisplay(filteredStorages);
-	};
-
 	useEffect(() => {
-		handleFilter();
+		setStoragesDisplay(handleFilter({ objList: storages, searchTerm }));
 	}, [searchTerm, storages]);
 
 	return (
@@ -87,9 +77,11 @@ const StoragesView = ({ storages }: StoragesViewProps) => {
 				</div>
 			</div>
 
-			<ScrollArea className="mt-3">
-				<DataTable data={StoragesDisplay} columns={StorageColumns} />
-			</ScrollArea>
+			<Suspense fallback={<TableLoading />}>
+				<ScrollArea className="mt-3">
+					<DataTable data={StoragesDisplay} columns={StorageColumns} />
+				</ScrollArea>
+			</Suspense>
 		</>
 	);
 };

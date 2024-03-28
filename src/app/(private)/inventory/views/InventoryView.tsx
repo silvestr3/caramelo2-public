@@ -2,7 +2,7 @@
 
 import { DataTable } from "@/components/ui/data-table";
 import { IBike } from "@/types/Bike";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BikeColumns } from "../components/BikeColumn";
 import SearchBar from "@/components/global/SearchBar";
 import {
@@ -12,11 +12,11 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Import, Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { handleFilter } from "@/app/hooks/useFilter";
+import TableLoading from "@/components/global/TableLoading";
 
 interface InventoryViewProps {
 	bikes: IBike[];
@@ -27,31 +27,20 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 	const [BikesDisplay, setBikesDisplay] = useState<IBike[]>(bikes);
 	const [includeSold, setIncludeSold] = useState<boolean>(false);
 
-	const router = useRouter();
-
 	const toogleIncludeSold = () => {
 		setIncludeSold((state) => !state);
 	};
 
-	const handleFilter = () => {
-		const filteredBikes = bikes
-			.filter((Bike: IBike) => {
-				for (const [_, value] of Object.entries(Bike)) {
-					if (String(value).toLowerCase().includes(searchTerm.toLowerCase())) {
-						return Bike;
-					}
-				}
-			})
-			.filter((bike: IBike) => {
-				if (!includeSold) return !bike.sold;
-				else return bike;
-			});
+	useEffect(() => {
+		const filteredBikes = handleFilter({
+			objList: bikes,
+			searchTerm,
+		}).filter((bike: IBike) => {
+			if (!includeSold) return !bike.sold;
+			else return bike;
+		});
 
 		setBikesDisplay(filteredBikes);
-	};
-
-	useEffect(() => {
-		handleFilter();
 	}, [searchTerm, bikes, includeSold]);
 
 	return (
@@ -105,9 +94,11 @@ const InventoryView = ({ bikes }: InventoryViewProps) => {
 				</label>
 			</div>
 
-			<ScrollArea className="h-[85%] mt-1">
-				<DataTable data={BikesDisplay} columns={BikeColumns} />
-			</ScrollArea>
+			<Suspense fallback={<TableLoading />}>
+				<ScrollArea className="h-[85%] mt-1">
+					<DataTable data={BikesDisplay} columns={BikeColumns} />
+				</ScrollArea>
+			</Suspense>
 		</>
 	);
 };
