@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
 	function middleware(req) {
-		const adminRoutes = ["/employees", "/storage"];
+		const adminRoutes = ["/employees", "/storage", "/reports"];
 
 		if (
 			adminRoutes.some((item) => req.nextUrl.pathname.startsWith(item)) &&
@@ -32,5 +32,6 @@ export const config = {
 		"/inventory/:path*",
 		"/sales/:path*",
 		"/storage/:path*",
+		"/reports/:path*",
 	],
 };

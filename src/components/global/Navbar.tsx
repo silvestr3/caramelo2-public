@@ -18,6 +18,11 @@ export const Navbar = () => {
 			admin: true,
 		},
 		{
+			href: "/reports",
+			label: "รายงาน",
+			admin: true,
+		},
+		{
 			href: "/inventory",
 			label: "สินค้า",
 		},
@@ -37,7 +42,7 @@ export const Navbar = () => {
 	];
 
 	return (
-		<nav className="w-full bg-slate-800 text-zinc-300 h-24 grid grid-cols-3 p-2">
+		<nav className="w-full bg-slate-800 flex items-center justify-between text-zinc-300 h-24  p-2">
 			<div className="flex items-center">
 				<Link
 					href="/dashboard"

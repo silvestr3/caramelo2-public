@@ -14,9 +14,9 @@ export default function PrivateLayout({
 	return (
 		<>
 			<OrderProvider>
-				<div className={`h-[calc(100%-96px)] ${prompt.className}`}>
+				<div className={`h-[calc(100%-96px)] bg-slate-200 ${prompt.className}`}>
 					<Navbar />
-					<main className="grid grid-cols-[3fr_1fr] bg-slate-200 text-slate-900 gap-0 mt-0">
+					<main className="grid grid-cols-[3fr_1fr] text-slate-900 gap-0 mt-0">
 						<section className="m-10 bg-slate-50 font-bold p-10 h-[80vh] rounded-xl pt-5">
 							{children}
 						</section>

@@ -5,6 +5,7 @@ import {
 	Receipt,
 	Warehouse,
 	Contact,
+	LineChart,
 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
@@ -44,6 +45,13 @@ const menuPages = [
 		style: buttonStyle + "bg-sky-100 hover:bg-sky-200",
 		icon: <Contact opacity={0.6} size={"2rem"} />,
 		label: "พนักงาน",
+		admin: true,
+	},
+	{
+		href: "/reports",
+		style: buttonStyle + "bg-purple-100 hover:bg-purple-200",
+		icon: <LineChart opacity={0.6} size={"2rem"} />,
+		label: "รายงาน",
 		admin: true,
 	},
 ];
