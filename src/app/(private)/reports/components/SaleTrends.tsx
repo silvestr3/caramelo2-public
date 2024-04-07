@@ -38,7 +38,7 @@ const SaleTrends = () => {
 	const plotData = Object.values(reportData).flatMap((yearData) => yearData);
 
 	return (
-		<div className="w-full h-full flex flex-col gap-3">
+		<div className="flex flex-col items-center justify-center h-full w-full">
 			<h2>Monthly revenue trends</h2>
 			<ResponsiveContainer width={"100%"} height={250}>
 				<ComposedChart

@@ -1,5 +1,8 @@
 "use client";
-import { getSalesPaymentMethodsReport } from "@/services/ReportsService";
+import {
+	getInventoryBrandsReport,
+	getInventoryStoragesReport,
+} from "@/services/ReportsService";
 import React, { useEffect, useState } from "react";
 import {
 	PieChart,
@@ -13,12 +16,12 @@ import {
 } from "recharts";
 import { generateRandomDarkColor } from "../util";
 
-const SalePayments = () => {
+const InventoryBrands = () => {
 	const [reportData, setReportData] = useState([]);
 
 	useEffect(() => {
 		const getData = async () => {
-			const { data } = await getSalesPaymentMethodsReport();
+			const { data } = await getInventoryStoragesReport();
 			setReportData(data);
 		};
 
@@ -26,26 +29,22 @@ const SalePayments = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col items-center justify-center">
-			<h2>Payment method usage</h2>
-			<ResponsiveContainer width={350} height={350}>
+		<div className="flex flex-col col-span-1 items-center justify-center">
+			<ResponsiveContainer width={200} height={200}>
 				<PieChart>
-					<Pie
-						nameKey={"payment_method"}
-						data={reportData}
-						dataKey={"total_sales"}
-					>
+					<Pie nameKey={"storage_name"} data={reportData} dataKey={"total"}>
 						{reportData.map((entry, index) => (
 							<Cell key={`cell-${index}`} fill={generateRandomDarkColor()} />
 						))}
-						<LabelList dataKey={"payment_method"} />
+						<LabelList dataKey={"storage_name"} />
 					</Pie>
 					<Tooltip />
-					<Legend layout="vertical" verticalAlign="middle" align="right" />
+					<Legend />
 				</PieChart>
 			</ResponsiveContainer>
+			<h2>Brands units per storage place</h2>
 		</div>
 	);
 };
 
-export default SalePayments;
+export default InventoryBrands;
