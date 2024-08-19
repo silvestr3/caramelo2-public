@@ -1,4 +1,4 @@
-# Caramelo POS
+# Caramelo POS - Web Client
 
 Complete Point of Sale application for motorbike store, designed for my girlfriend's business in Thailand.
 
@@ -63,10 +63,4 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
