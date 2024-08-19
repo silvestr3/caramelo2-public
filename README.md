@@ -1,5 +1,13 @@
 # Caramelo POS
 
+Complete Point of Sale application for motorbike store, designed for my girlfriend's business in Thailand.
+
+Demo instance available at: [https://demo.caramelopos.com/](https://demo.caramelopos.com/)
+
+Credentials:
+- Username: `demouser`
+- Password: `demopassword`
+
 ## Features
 
 - [x] Inventory
