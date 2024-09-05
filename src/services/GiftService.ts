@@ -1,6 +1,8 @@
 "use server";
 
+import { Gift } from "@/types/Gift";
 import { authorizedFetch } from "@/util/AuthorizedFetch";
+import { revalidatePath } from "next/cache";
 
 export const getGifts = async () => {
   "use server";
@@ -26,4 +28,24 @@ export const getGift = async (gift_id: number) => {
   );
 
   return response;
+};
+
+export const createGift = async (payload: Gift) => {
+  "use server";
+  const response = await authorizedFetch(`${process.env.API_URL}/gifts/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  let status = "error";
+
+  if (response?.status === 201) {
+    revalidatePath("/gifts");
+    status = "success";
+  }
+
+  return { status, data: response?.json() };
 };
