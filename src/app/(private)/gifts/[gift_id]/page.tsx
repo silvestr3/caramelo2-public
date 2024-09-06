@@ -14,6 +14,7 @@ import { Gift } from "@/types/Gift";
 import { Frown } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import AddProducts from "./AddProducts";
 
 interface ViewGiftProps {
   params: {
@@ -63,17 +64,14 @@ const ViewGift = async ({ params }: ViewGiftProps) => {
 
       <div className="py-2 grid grid-cols-2 gap-x-5">
         <div className="col-span-1">
-          <h2 className="text-3xl font-semibold prompt">{gift.name}</h2>
-          <span>Amount in stock: {gift.stock}</span>
+          <h2 className="text-3xl font-semibold prompt flex flex-col">
+            {gift.name}
+          </h2>
+          <span className="block">Amount in stock: {gift.stock}</span>
+          <span className="block">Price: {gift.price}</span>
         </div>
 
-        <div className="col-span-1 flex gap-1">
-          <Input
-            type="number"
-            placeholder={`Add ${gift.name}s to stock`}
-          ></Input>
-          <Button>Add</Button>
-        </div>
+        <AddProducts gift={gift} />
       </div>
     </>
   );
