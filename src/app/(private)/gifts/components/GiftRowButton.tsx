@@ -26,12 +26,6 @@ const GiftRowButton = ({ gift }: { gift: Gift }) => {
             ดู
           </DropdownMenuItem>
         </Link>
-        <Link href={`/gifts/${gift.id}/edit`}>
-          <DropdownMenuItem className="flex justify-between">
-            <Pencil className="opacity-60" />
-            แก้ไข
-          </DropdownMenuItem>
-        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

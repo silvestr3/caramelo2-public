@@ -21,8 +21,6 @@ const AddProducts = ({ gift }: AddProductsProps) => {
 
     const result = await addGiftsToStock(gift.id, amount);
 
-    console.log(result);
-
     const { message } = result.data;
 
     if (result.status === "success") {
@@ -44,7 +42,7 @@ const AddProducts = ({ gift }: AddProductsProps) => {
         }
         placeholder={`Add ${gift.name}s to stock`}
       ></Input>
-      <Button onClick={addProducts}>Add</Button>
+      <Button onClick={addProducts}>Add products</Button>
     </div>
   );
 };
