@@ -65,6 +65,7 @@ export const Navbar = () => {
               <>
                 {userInfo?.role === "adm" && (
                   <Link
+                    key={item.label}
                     href={item.href}
                     className="cursor-pointer p-3 rounded hover:bg-slate-600"
                   >
@@ -75,6 +76,7 @@ export const Navbar = () => {
             ) : (
               <>
                 <Link
+                  key={item.label}
                   href={item.href}
                   className="cursor-pointer p-3 rounded hover:bg-slate-600"
                 >

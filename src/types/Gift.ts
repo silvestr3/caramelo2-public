@@ -4,3 +4,9 @@ export interface Gift {
   price: number;
   stock: number;
 }
+
+export interface OrderGift {
+  id: number;
+  name: string;
+  amount: number;
+}
