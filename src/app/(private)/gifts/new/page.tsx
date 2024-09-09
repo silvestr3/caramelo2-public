@@ -7,24 +7,23 @@ import {
   BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-import React from "react";
-import CustomerForm from "./components/CustomerForm";
-import { getStorages } from "@/services/StorageService";
 import Link from "next/link";
+import React from "react";
+import GiftForm from "./components/GiftForm";
 
-const CreateCustomer = async () => {
+const CreateGift = () => {
   return (
     <>
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/customers">ลูกค้า</Link>
+              <Link href="/gifts">Gifts</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Register new customer</BreadcrumbPage>
+            <BreadcrumbPage>Register new gift</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -33,13 +32,13 @@ const CreateCustomer = async () => {
 
       <div className="py-2 grid grid-cols-2 place-content-start gap-x-5 h-full">
         <div className="col-span-2 max-h-[20%]">
-          <h2 className="text-3xl font-semibold prompt">New customer</h2>
+          <h2 className="text-3xl font-semibold prompt">New gift</h2>
         </div>
 
-        <CustomerForm />
+        <GiftForm />
       </div>
     </>
   );
 };
 
-export default CreateCustomer;
+export default CreateGift;
