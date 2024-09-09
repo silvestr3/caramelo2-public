@@ -31,9 +31,10 @@ interface OrderGiftDialogProps {
 }
 
 const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
-  const { addOrderGift, editOrderGift } = useContext(OrderContext);
+  const { addOrderGift, editOrderGift, orderGifts } = useContext(OrderContext);
 
   const [allGifts, setAllGifts] = useState<Gift[]>([]);
+  const [orderGiftsIds, setOrderGiftsIds] = useState<number[]>([]);
 
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -51,6 +52,10 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
       setAmount(gift.amount);
     }
   }, [gift]);
+
+  useEffect(() => {
+    setOrderGiftsIds(orderGifts.map((item) => item.id));
+  }, [orderGifts]);
 
   useEffect(() => {
     fetchGiftsStock();
@@ -108,9 +113,16 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
                     </SelectTrigger>
                     <SelectContent>
                       {allGifts.map((gift) => (
-                        <SelectItem key={gift.id} value={gift.id.toString()}>
-                          {gift.name}
-                        </SelectItem>
+                        <>
+                          {!orderGiftsIds.includes(gift.id) && (
+                            <SelectItem
+                              key={gift.id}
+                              value={gift.id.toString()}
+                            >
+                              {gift.name}
+                            </SelectItem>
+                          )}
+                        </>
                       ))}
                     </SelectContent>
                   </Select>
