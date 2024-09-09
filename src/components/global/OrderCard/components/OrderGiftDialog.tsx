@@ -93,6 +93,7 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
       id: Number(id),
       name,
       amount,
+      quantity: amount,
     };
 
     addOrderGift(orderGift);
@@ -107,6 +108,7 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
         id: gift.id,
         name: gift.name,
         amount,
+        quantity: amount,
       };
 
       editOrderGift(editGift);
