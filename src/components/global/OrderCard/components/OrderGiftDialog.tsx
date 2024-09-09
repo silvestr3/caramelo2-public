@@ -36,14 +36,33 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
   const [allGifts, setAllGifts] = useState<Gift[]>([]);
   const [orderGiftsIds, setOrderGiftsIds] = useState<number[]>([]);
 
+  const [canAddGift, setCanAddGift] = useState<boolean>(true);
+
   const [id, setId] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [amount, setAmount] = useState<number>(0);
+
+  const [selectedGiftAvailableStock, setSelectedGiftAvailableStock] = useState<
+    number | undefined
+  >(undefined);
 
   async function fetchGiftsStock() {
     const gifts: Gift[] = await getGifts();
     setAllGifts(gifts);
   }
+
+  useEffect(() => {
+    if (!selectedGiftAvailableStock) {
+      setCanAddGift(false);
+      return;
+    }
+
+    if (amount > selectedGiftAvailableStock) {
+      setCanAddGift(false);
+    } else {
+      setCanAddGift(true);
+    }
+  }, [amount, selectedGiftAvailableStock, id]);
 
   useEffect(() => {
     if (gift) {
@@ -64,6 +83,9 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
   useEffect(() => {
     const giftName = allGifts.find((gift) => gift.id.toString() === id);
     setName(giftName ? giftName.name : "");
+    setSelectedGiftAvailableStock(
+      id ? allGifts.find((item) => item.id === Number(id))?.stock : undefined
+    );
   }, [id, allGifts]);
 
   function handleAddOrderGift() {
@@ -137,16 +159,28 @@ const OrderGiftDialog = ({ children, gift }: OrderGiftDialogProps) => {
                   onChange={(e) => setAmount(parseFloat(e.target.value))}
                   id="amount"
                 />
+                {selectedGiftAvailableStock && (
+                  <span>Available: {selectedGiftAvailableStock}</span>
+                )}
               </div>
             </div>
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter className="flex items-center">
+          {!canAddGift && id && (
+            <>
+              <span className="text-red-500">Amount unavailable</span>
+            </>
+          )}
           <DialogClose asChild>
             {!gift ? (
-              <Button onClick={handleAddOrderGift}>Add</Button>
+              <Button disabled={!canAddGift} onClick={handleAddOrderGift}>
+                Add
+              </Button>
             ) : (
-              <Button onClick={handleEditOrderGift}>Edit</Button>
+              <Button disabled={!canAddGift} onClick={handleEditOrderGift}>
+                Edit
+              </Button>
             )}
           </DialogClose>
         </DialogFooter>

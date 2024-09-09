@@ -134,7 +134,7 @@ const OrderCard = () => {
             </div>
 
             <div className="flex items-center justify-start gap-3 p-3">
-              <span>Gifts</span>
+              <span>ของแถม</span>
               <OrderGiftDialog>
                 <Button className="bg-slate-700 hover:rounded hover:scale-105 cursor-pointer rounded-lg p-1 size-6 flex items-center justify-center">
                   <Plus className="text-slate-50" />

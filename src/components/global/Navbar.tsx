@@ -14,7 +14,7 @@ export const Navbar = () => {
     },
     {
       href: "/gifts",
-      label: "Gifts",
+      label: "ของแถม",
     },
     {
       href: "/employees",
