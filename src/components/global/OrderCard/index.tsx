@@ -72,6 +72,7 @@ const OrderCard = () => {
       customer: orderCustomer.id,
       bikes: [orderBike],
       additional_fees: orderAdditionalFees.map((fee) => fee),
+      gifts: orderGifts.map((gift) => gift),
       discount,
       down_payment,
       payment_method,

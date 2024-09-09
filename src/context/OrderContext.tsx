@@ -109,6 +109,7 @@ const OrderProvider = ({ children }: { children: React.ReactNode }) => {
 
   const resetOrder = () => {
     setOrderAdditionalFees([]);
+    setOrderGifts([]);
     removeBikeFromOrder();
     removeCustomerFromOrder();
     setDiscount(0);
