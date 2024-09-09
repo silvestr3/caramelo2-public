@@ -9,4 +9,5 @@ export interface OrderGift {
   id: number;
   name: string;
   amount: number;
+  quantity: number;
 }
