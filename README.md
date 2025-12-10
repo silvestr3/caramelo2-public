@@ -2,11 +2,25 @@
 
 Complete Point of Sale application for motorbike store, designed for my girlfriend's business in Thailand.
 
-Demo instance available at: [https://demo.caramelopos.com/](https://demo.caramelopos.com/)
 
-Credentials:
-- Username: `demouser`
-- Password: `demopassword`
+## Getting Started
+
+1. Setup the API service, as per instructions [here](https://github.com/silvestr3/caramelo2-api)
+
+2. Install dependencies
+```bash
+npm install
+```
+
+3. Setup environment variables as per example
+
+
+4. Run the development server:
+
+```bash
+npm run dev
+```
+
 
 ## Features
 
@@ -57,10 +71,3 @@ Credentials:
 	- [x] Employee user cannot edit sale
 	
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-```
